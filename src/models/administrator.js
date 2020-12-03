@@ -3,14 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     'Administrators',
     {
       admin: DataTypes.INTEGER,
-      createdAt: {
-        type: DataTypes.DATE,
-        field: 'created_at',
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        field: 'updated_at',
-      },
     },
     {
       tableName: 'administrators',
