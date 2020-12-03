@@ -5,7 +5,7 @@ const {
   validationSchemas: { users },
 } = require('../validations');
 
-router.use(isAuthorized);
+// router.use(isAuthorized);
 
 router.get('/', validate(users.list), usersController.list);
 router.get('/:id', validate(users.get), usersController.get);
