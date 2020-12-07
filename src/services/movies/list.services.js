@@ -8,7 +8,7 @@ module.exports = {
     const movies = await moviesRepository.list();
 
     if (!movies) {
-      throw new ApplicationError(messages.notFound('movies'), StatusCodes.NOT_FOUND);
+      throw new ApplicationError(messages.notFound('movies'), StatusCodes.NO_CONTENT);
     }
 
     return movies;

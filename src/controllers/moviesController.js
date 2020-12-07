@@ -6,6 +6,7 @@ module.exports = {
     const movies = await moviesService.index();
 
     if (movies.length === 0) {
+      response.set({ 'Content-Length': '0' });
       return response.status(StatusCodes.NO_CONTENT).end();
     }
 

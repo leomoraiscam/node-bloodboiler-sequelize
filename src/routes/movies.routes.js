@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const { moviesController } = require('../controllers');
-const { isAuthorized } = require('../middlewares');
+const { isAuthorized, validate } = require('../middlewares');
+const {
+  validationSchemas: { movies },
+} = require('../validations');
 
 router.get('/', isAuthorized, moviesController.index);
-router.post('/', moviesController.create);
+router.post('/', isAuthorized, validate(movies.create), moviesController.create);
 
 module.exports.movies = router;
