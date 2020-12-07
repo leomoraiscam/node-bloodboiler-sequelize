@@ -6,6 +6,16 @@ module.exports = (sequelize, DataTypes) => {
       director: { type: DataTypes.STRING, allowNull: false },
       author: { type: DataTypes.STRING, allowNull: false },
       genre: { type: DataTypes.STRING, allowNull: false },
+      createdBy: {
+        type: DataTypes.INTEGER,
+        field: 'created_by_user_id',
+        allowNull: false,
+      },
+      updatedBy: {
+        type: DataTypes.INTEGER,
+        field: 'updated_by_user_id',
+        allowNull: false,
+      },
       createdAt: {
         type: DataTypes.DATE,
         field: 'created_at',
@@ -22,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Movies.associate = function associate(models) {
     models.Movies.belongsTo(models.Administrator, {
-      foreignKey: 'id_user',
+      foreignKey: 'createdBy',
+    });
+    models.Movies.belongsTo(models.Administrator, {
+      foreignKey: 'updatedAt',
     });
   };
 
