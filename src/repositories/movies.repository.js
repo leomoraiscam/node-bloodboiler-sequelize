@@ -1,7 +1,7 @@
 const { Movies } = require('../models');
 
 module.exports = {
-  list: () => Movies.findAll(),
+  list: (query) => Movies.findAndCountAll(query),
   create: (params) => Movies.create(params),
   get: (params) =>
     Movies.findOne({

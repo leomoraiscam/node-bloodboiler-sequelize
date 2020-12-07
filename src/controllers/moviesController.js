@@ -3,7 +3,9 @@ const { moviesService } = require('../services');
 
 module.exports = {
   index: async (request, response) => {
-    const movies = await moviesService.index();
+    const { page, perPage, sortBy } = request.query;
+
+    const movies = await moviesService.index({ page, perPage, sortBy });
 
     if (movies.length === 0) {
       return response

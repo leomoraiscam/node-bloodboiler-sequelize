@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'createdBy',
     });
     models.Movies.belongsTo(models.Administrator, {
-      foreignKey: 'updatedAt',
+      foreignKey: 'updatedBy',
     });
   };
 

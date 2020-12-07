@@ -1,10 +1,21 @@
-const { StatusCodes } = require('http-status-codes');
 const { moviesRepository } = require('../../repositories');
-const { ApplicationError } = require('../../utils');
-const { messages } = require('../../helpers');
+const { queryHelper } = require('../../helpers');
 
 module.exports = {
-  index: async () => {
-    return await moviesRepository.list();
+  index: async (options) => {
+    const query = queryHelper(options);
+
+    const { count, rows } = await moviesRepository.list(query);
+    const totalPages = Math.ceil(count / options.perPage);
+
+    return {
+      metadata: {
+        total: count,
+        totalPages,
+        ...(options.page > 1 && { previousPage: options.page - 1 }),
+        ...(options.page < count && options.page < totalPages && { nextPage: options.page + 1 }),
+      },
+      data: rows,
+    };
   },
 };
