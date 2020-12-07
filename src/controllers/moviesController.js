@@ -11,10 +11,10 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(movies);
   },
-  create: async (req, res) => {
-    const { body } = req;
-    const response = await moviesService.create(body);
+  create: async (request, response) => {
+    const { body } = request;
+    const movie = await moviesService.create(body);
 
-    return res.status(StatusCodes.CREATED).json(response);
+    return res.status(StatusCodes.CREATED).json(movie);
   },
 };
