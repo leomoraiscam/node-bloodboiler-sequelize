@@ -7,7 +7,14 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      id_user: {
+      created_by_user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      updated_by_user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'users', key: 'id' },
