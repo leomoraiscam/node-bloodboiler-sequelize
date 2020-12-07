@@ -17,7 +17,8 @@
     "test": "jest -i",
     "test:coverage": "jest -i && codecov",
     "pretest": "NODE_ENV=test npx sequelize db:create && NODE_ENV=test npx sequelize db:migrate",
-    "posttest": "NODE_ENV=test npx sequelize db:drop"
+    "posttest": "NODE_ENV=test npx sequelize db:drop",
+    "commit": "cz"
   },
   "husky": {
     "hooks": {
@@ -42,12 +43,16 @@
     "swagger-ui-express": "^4.1.4",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1",
-    "yup": "^0.29.1"
+    "yup": "^0.29.1",
+    "commitizen": "^2.7.6",
+    "cz-conventional-changelog": "^1.1.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "codecov": "^3.7.1",
+    "company-commit": "^1.1.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",
@@ -76,5 +81,10 @@
     "rest",
     "api",
     "jest"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
