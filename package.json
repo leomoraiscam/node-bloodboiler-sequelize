@@ -3,9 +3,9 @@
   "version": "1.1.0",
   "description": "A API built on top of expressJS",
   "main": "app.js",
-  "author": "Lucas A Pelegrino <lucas.assuncao.p@gmail.com>",
+  "author": "Leonardo Morais <lmorais.contato.p@gmail.com>",
   "license": "MIT",
-  "repository": "https://github.com/lucas-a-pelegrino/node-bloodboiler-sequelized",
+  "repository": "https://github.com/leomoraiscam/node-bloodboiler-sequelize",
   "engines": {
     "node": ">=12.0.0"
   },
