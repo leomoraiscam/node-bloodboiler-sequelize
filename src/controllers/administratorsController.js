@@ -6,7 +6,10 @@ module.exports = {
     const administrators = await administratorsService.index();
 
     if (administrators.length === 0) {
-      return response.status(StatusCodes.NO_CONTENT).end();
+      return response
+        .status(StatusCodes.NO_CONTENT)
+        .set({ 'Content-Length': '0' })
+        .end();
     }
 
     return response.status(StatusCodes.OK).json(administrators);

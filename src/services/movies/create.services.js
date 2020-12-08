@@ -7,6 +7,8 @@ module.exports = {
   create: async (params) => {
     const movieExists = await moviesRepository.get({ name: params.name });
 
+    console.log(movieExists);
+
     if (movieExists) {
       throw new ApplicationError(messages.alreadyExists('movie'), StatusCodes.CONFLICT);
     }
