@@ -9,7 +9,7 @@ module.exports = {
       return response.status(StatusCodes.NO_CONTENT).end();
     }
 
-    return response.status(StatusCodes.OK).json(response);
+    return response.status(StatusCodes.OK).json(administrators);
   },
 
   create: async (req, res) => {
