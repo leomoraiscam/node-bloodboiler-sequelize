@@ -20,6 +20,6 @@ module.exports = {
     const { body } = request;
     const movie = await moviesService.create(body);
 
-    return res.status(StatusCodes.CREATED).json(movie);
+    return response.status(StatusCodes.CREATED).json(movie);
   },
 };

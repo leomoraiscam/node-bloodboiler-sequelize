@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const { adminstratorsRepository } = require('../repositories');
 const { administratorsService } = require('../services');
 
 module.exports = {
@@ -14,7 +15,16 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(administrators);
   },
+  list: async (req, res) => {
+    const { page, perPage, sortBy } = req.query;
+    const response = await administratorsService.list({ page, perPage, sortBy });
 
+    if (!response || response.data.length === 0) {
+      return res.status(StatusCodes.NO_CONTENT).end();
+    }
+
+    return res.status(StatusCodes.OK).json(response);
+  },
   create: async (req, res) => {
     const { body } = req;
     const response = await administratorsService.create(body);

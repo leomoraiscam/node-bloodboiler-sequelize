@@ -19,42 +19,13 @@ beforeAll(async () => {
   authToken = token;
 });
 
-describe('Administrators users Endpoints', () => {
-  describe('POST /administrators', () => {
-    test('Should create an user administrator', async () => {
-      sampleUser = {
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        password: 'P@ssw0rd',
-      };
-
-      const user = await request(app)
-        .post(`${baseURL}/users`)
-        .set('Authorization', `Bearer ${authToken}`)
-        .send(sampleUser);
-
-      const sampleUserAdmin = {
-        id_user: user.body.id,
-        admin: 1,
-      };
-
-      const response = await request(app)
-        .post(`${baseURL}/administrators`)
-        .set('Authorization', `Bearer ${authToken}`)
-        .send(sampleUserAdmin);
-
-      expect(response.status).toBe(StatusCodes.CREATED);
-    });
-  });
-});
-
-describe('GET /users', () => {
-  test('Should return a list of users administrators and metadata', async () => {
+describe('GET /movies', () => {
+  test('Should return a list of movies and metadata', async () => {
     const page = 1;
     const perPage = 10;
     const sortBy = 'createdAt:asc';
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/movies?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -66,9 +37,9 @@ describe('GET /users', () => {
     });
   });
 
-  test('Should return a list of users and metadata (without query params)', async () => {
+  test('Should return a list of movies and metadata (without query params)', async () => {
     const response = await request(app)
-      .get(`${baseURL}/administrators/list`)
+      .get(`${baseURL}/movies`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -85,7 +56,7 @@ describe('GET /users', () => {
     const perPage = 1;
     const sortBy = 'createdAt:asc';
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/movies?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -101,7 +72,7 @@ describe('GET /users', () => {
     const page = 5;
     const perPage = 10;
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}`)
+      .get(`${baseURL}/movies?page=${page}&perPage=${perPage}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.NO_CONTENT);
@@ -112,7 +83,7 @@ describe('GET /users', () => {
     const perPage = 10;
     const sortBy = 'createdAtdesc';
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/movies?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
