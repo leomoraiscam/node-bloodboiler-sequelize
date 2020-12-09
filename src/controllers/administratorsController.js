@@ -15,20 +15,25 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(administrators);
   },
-  list: async (req, res) => {
-    const { page, perPage, sortBy } = req.query;
-    const response = await administratorsService.list({ page, perPage, sortBy });
+  list: async (request, response) => {
+    const { page, perPage, sortBy } = request.query;
+
+    const administrators = await administratorsService.list({ page, perPage, sortBy });
 
     if (!response || response.data.length === 0) {
-      return res.status(StatusCodes.NO_CONTENT).end();
+      return response
+        .status(StatusCodes.NO_CONTENT)
+        .set({ 'Content-Length': '0' })
+        .end();
     }
 
-    return res.status(StatusCodes.OK).json(response);
+    return response.status(StatusCodes.OK).json(administrators);
   },
-  create: async (req, res) => {
-    const { body } = req;
-    const response = await administratorsService.create(body);
+  create: async (request, response) => {
+    const { body } = request;
 
-    return res.status(StatusCodes.CREATED).json(response);
+    const administrator = await administratorsService.create(body);
+
+    return response.status(StatusCodes.CREATED).json(administrator);
   },
 };

@@ -17,6 +17,20 @@ const list = {
   }),
 };
 
+const create = {
+  body: yup.object().shape({
+    id_user: yup
+      .number()
+      .positive()
+      .required(),
+    id_user: yup
+      .number()
+      .positive()
+      .required(),
+  }),
+};
+
 module.exports.administrators = {
   list,
+  create,
 };
