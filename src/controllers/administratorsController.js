@@ -20,7 +20,7 @@ module.exports = {
 
     const administrators = await administratorsService.list({ page, perPage, sortBy });
 
-    if (!response || response.data.length === 0) {
+    if (!administrators || administrators.data.length === 0) {
       return response
         .status(StatusCodes.NO_CONTENT)
         .set({ 'Content-Length': '0' })
