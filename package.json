@@ -17,6 +17,7 @@
     "test": "jest -i",
     "test:coverage": "jest -i && codecov",
     "pretest": "NODE_ENV=test npx sequelize db:create && NODE_ENV=test npx sequelize db:migrate",
+    "posttest": "NODE_ENV=test npx sequelize db:drop",
     "commit": "cz"
   },
   "husky": {
