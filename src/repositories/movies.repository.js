@@ -5,8 +5,6 @@ module.exports = {
   create: (params) => Movies.create(params),
   get: (params) =>
     Movies.findOne({
-      where: {
-        params,
-      },
+      where: params,
     }),
 };

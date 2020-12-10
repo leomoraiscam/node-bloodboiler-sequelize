@@ -1,8 +1,12 @@
 const router = require('express').Router();
 const { administratorsController } = require('../controllers');
-const { isAuthorized } = require('../middlewares');
+const { isAuthorized, validate } = require('../middlewares');
+const {
+  validationSchemas: { administrators },
+} = require('../validations');
 
-router.get('/', isAuthorized, administratorsController.index);
-router.post('/', administratorsController.create);
+router.get('/:id', isAuthorized, administratorsController.index);
+router.get('/', isAuthorized, validate(administrators.list), administratorsController.list);
+router.post('/', isAuthorized, validate(administrators.create), administratorsController.create);
 
 module.exports.administrators = router;

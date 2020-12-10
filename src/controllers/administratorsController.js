@@ -1,21 +1,41 @@
 const { StatusCodes } = require('http-status-codes');
 const { administratorsService } = require('../services');
+const { catchAsync } = require('../utils');
 
 module.exports = {
-  index: async (request, response) => {
-    const administrators = await administratorsService.index();
+  index: catchAsync(async (request, response) => {
+    const { id } = request.params;
 
-    if (administrators.length === 0) {
-      return response.status(StatusCodes.NO_CONTENT).end();
+    const administrator = await administratorsService.get(id);
+
+    if (!administrator) {
+      return response
+        .status(StatusCodes.NO_CONTENT)
+        .set({ 'Content-Length': '0' })
+        .end();
     }
 
-    return response.status(StatusCodes.OK).json(response);
-  },
+    return response.status(StatusCodes.OK).json(administrator);
+  }),
+  list: catchAsync(async (request, response) => {
+    const { page, perPage, sortBy } = request.query;
 
-  create: async (req, res) => {
-    const { body } = req;
-    const response = await administratorsService.create(body);
+    const administrators = await administratorsService.list({ page, perPage, sortBy });
 
-    return res.status(StatusCodes.CREATED).json(response);
-  },
+    if (!administrators || administrators.data.length === 0) {
+      return response
+        .status(StatusCodes.NO_CONTENT)
+        .set({ 'Content-Length': '0' })
+        .end();
+    }
+
+    return response.status(StatusCodes.OK).json(administrators);
+  }),
+  create: catchAsync(async (request, response) => {
+    const { body } = request;
+
+    const administrator = await administratorsService.create(body);
+
+    return response.status(StatusCodes.CREATED).json(administrator);
+  }),
 };
