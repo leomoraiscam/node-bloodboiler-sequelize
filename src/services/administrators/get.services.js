@@ -4,8 +4,8 @@ const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
 
 module.exports = {
-  index: async () => {
-    const administrators = await adminstratorsRepository.index();
+  get: async (params) => {
+    const administrators = await adminstratorsRepository.get({ id: params });
 
     if (!administrators) {
       throw new ApplicationError(messages.notFound('adminstrators'), StatusCodes.NOT_FOUND);

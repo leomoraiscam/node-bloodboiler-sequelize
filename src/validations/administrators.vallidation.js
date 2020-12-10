@@ -19,7 +19,7 @@ const list = {
 
 const create = {
   body: yup.object().shape({
-    id_user: yup
+    idUser: yup
       .number()
       .positive()
       .required(),

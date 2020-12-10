@@ -3,18 +3,20 @@ const { administratorsService } = require('../services');
 const { catchAsync } = require('../utils');
 
 module.exports = {
-  index: async (request, response) => {
-    const administrators = await administratorsService.index();
+  index: catchAsync(async (request, response) => {
+    const { id } = request.params;
 
-    if (administrators.length === 0) {
+    const administrator = await administratorsService.get(id);
+
+    if (!administrator) {
       return response
         .status(StatusCodes.NO_CONTENT)
         .set({ 'Content-Length': '0' })
         .end();
     }
 
-    return response.status(StatusCodes.OK).json(administrators);
-  },
+    return response.status(StatusCodes.OK).json(administrator);
+  }),
   list: async (request, response) => {
     const { page, perPage, sortBy } = request.query;
 

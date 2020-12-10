@@ -1,13 +1,10 @@
 const { Administrator } = require('../models');
 
 module.exports = {
-  index: () => Administrator.findAll(),
+  list: (query) => Administrator.findAndCountAll(query),
   get: (params) =>
     Administrator.findOne({
-      where: {
-        id_user: params,
-      },
+      where: params,
     }),
-  list: (query) => Administrator.findAndCountAll(query),
   create: (params) => Administrator.create(params),
 };

@@ -4,12 +4,13 @@ const { StatusCodes } = require('http-status-codes');
 const app = require('../../config/express');
 const { messages } = require('../../helpers');
 const { version } = require('../../config/env');
+
 const { createSampleUsers, createSampleUser } = require('../fixtures/users.fixtures');
 const { generateSampleToken, generateSampleInvalidToken } = require('../fixtures/auth.fixtures');
 
 const baseURL = `/api/${version}`;
 
-let sampleUser;
+let sampleUserAdmin;
 let authToken;
 
 beforeAll(async () => {
@@ -33,17 +34,50 @@ describe('Administrators users Endpoints', () => {
         .set('Authorization', `Bearer ${authToken}`)
         .send(sampleUser);
 
-      const sampleUserAdmin = {
-        id_user: user.body.id,
+      const mainSampleUserAdmin = {
+        idUser: user.body.id,
         admin: 1,
       };
 
       const response = await request(app)
         .post(`${baseURL}/administrators`)
         .set('Authorization', `Bearer ${authToken}`)
-        .send(sampleUserAdmin);
+        .send(mainSampleUserAdmin);
 
       expect(response.status).toBe(StatusCodes.CREATED);
+    });
+
+    test('Should return 409 - Conflict', async () => {
+      const mainSampleUserAdmin = {
+        idUser: 1,
+        admin: 1,
+      };
+
+      const response = await request(app)
+        .post(`${baseURL}/administrators`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(mainSampleUserAdmin);
+
+      const mainResponse = await request(app)
+        .post(`${baseURL}/administrators`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(mainSampleUserAdmin);
+
+      expect(mainResponse.status).toBe(StatusCodes.CONFLICT);
+    });
+
+    test('Should return 400 - Not Found', async () => {
+      const mainSampleUserAdmin = {
+        idUser: 500,
+        admin: 1,
+      };
+
+      const response = await request(app)
+        .post(`${baseURL}/administrators`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(mainSampleUserAdmin);
+
+      expect(response.status).toBe(StatusCodes.NOT_FOUND);
     });
   });
 });
@@ -81,9 +115,36 @@ describe('GET /users', () => {
   });
 
   test('Should return metadata with nextPage params', async () => {
-    const page = 1;
+    const page = 2;
     const perPage = 1;
     const sortBy = 'createdAt:asc';
+
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleUserAdmin = {
+      idUser: user.body.id,
+      admin: 1,
+    };
+
+    await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
+    await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
     const response = await request(app)
       .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
@@ -97,6 +158,35 @@ describe('GET /users', () => {
     });
   });
 
+  test('Should return 200 - Sucess', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleUserAdmin = {
+      idUser: user.body.id,
+      admin: 1,
+    };
+
+    const admin = await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
+    const response = await request(app)
+      .get(`${baseURL}/administrators/show/${admin.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.OK);
+  });
+
   test('Should return 204 - No Content', async () => {
     const page = 5;
     const perPage = 10;
@@ -105,6 +195,14 @@ describe('GET /users', () => {
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    const response = await request(app)
+      .get(`${baseURL}/administrators/show/12354`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
   });
 
   test('Should return 400 - Bad Request if sortBy has invalid input', async () => {
