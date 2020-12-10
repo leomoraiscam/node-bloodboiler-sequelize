@@ -7,6 +7,7 @@ module.exports = {
   get: async (id) => {
     const administrators = await adminstratorsRepository.getById(id);
 
+    console.log(administrators);
     if (!administrators) {
       throw new ApplicationError(messages.notFound('adminstrators'), StatusCodes.NOT_FOUND);
     }
