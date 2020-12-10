@@ -23,7 +23,7 @@ const create = {
       .number()
       .positive()
       .required(),
-    id_user: yup
+    admin: yup
       .number()
       .positive()
       .required(),

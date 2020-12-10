@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
-const { adminstratorsRepository } = require('../repositories');
 const { administratorsService } = require('../services');
+const { catchAsync } = require('../utils');
 
 module.exports = {
   index: async (request, response) => {
@@ -29,11 +29,11 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(administrators);
   },
-  create: async (request, response) => {
+  create: catchAsync(async (request, response) => {
     const { body } = request;
 
     const administrator = await administratorsService.create(body);
 
     return response.status(StatusCodes.CREATED).json(administrator);
-  },
+  }),
 };

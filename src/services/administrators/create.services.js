@@ -11,11 +11,15 @@ module.exports = {
       throw new ApplicationError(messages.notFound('users'), StatusCodes.NOT_FOUND);
     }
 
-    const createAdministrators = await adminstratorsRepository.create({
+    const isAdministrator = await adminstratorsRepository.get(params.id_user);
+
+    if (isAdministrator) {
+      throw new ApplicationError(messages.alreadyExists('administrator'), StatusCodes.CONFLICT);
+    }
+
+    return adminstratorsRepository.create({
       id_user: params.id_user,
       admin: params.admin,
     });
-
-    return createAdministrators;
   },
 };
