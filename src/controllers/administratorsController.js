@@ -17,7 +17,7 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(administrator);
   }),
-  list: async (request, response) => {
+  list: catchAsync(async (request, response) => {
     const { page, perPage, sortBy } = request.query;
 
     const administrators = await administratorsService.list({ page, perPage, sortBy });
@@ -30,7 +30,7 @@ module.exports = {
     }
 
     return response.status(StatusCodes.OK).json(administrators);
-  },
+  }),
   create: catchAsync(async (request, response) => {
     const { body } = request;
 

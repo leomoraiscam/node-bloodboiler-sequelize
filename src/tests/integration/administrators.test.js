@@ -88,7 +88,7 @@ describe('GET /users', () => {
     const perPage = 10;
     const sortBy = 'createdAt:asc';
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/administrators?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -102,7 +102,7 @@ describe('GET /users', () => {
 
   test('Should return a list of users and metadata (without query params)', async () => {
     const response = await request(app)
-      .get(`${baseURL}/administrators/list`)
+      .get(`${baseURL}/administrators`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -146,7 +146,7 @@ describe('GET /users', () => {
       .send(mainSampleUserAdmin);
 
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/administrators?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -181,7 +181,7 @@ describe('GET /users', () => {
       .send(mainSampleUserAdmin);
 
     const response = await request(app)
-      .get(`${baseURL}/administrators/show/${admin.body.id}`)
+      .get(`${baseURL}/administrators/${admin.body.id}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.OK);
@@ -191,7 +191,7 @@ describe('GET /users', () => {
     const page = 5;
     const perPage = 10;
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}`)
+      .get(`${baseURL}/administrators?page=${page}&perPage=${perPage}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.NO_CONTENT);
@@ -199,7 +199,7 @@ describe('GET /users', () => {
 
   test('Should return 404 - Not Found', async () => {
     const response = await request(app)
-      .get(`${baseURL}/administrators/show/12354`)
+      .get(`${baseURL}/administrators/12354`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.NOT_FOUND);
@@ -210,7 +210,7 @@ describe('GET /users', () => {
     const perPage = 10;
     const sortBy = 'createdAtdesc';
     const response = await request(app)
-      .get(`${baseURL}/administrators/list?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
+      .get(`${baseURL}/administrators?page=${page}&perPage=${perPage}&sortBy=${sortBy}`)
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(response.status).toBe(StatusCodes.BAD_REQUEST);
