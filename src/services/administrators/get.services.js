@@ -5,7 +5,7 @@ const { messages } = require('../../helpers');
 
 module.exports = {
   get: async (id) => {
-    const administrators = await adminstratorsRepository.get({ id });
+    const administrators = await adminstratorsRepository.getById(id);
 
     if (!administrators) {
       throw new ApplicationError(messages.notFound('adminstrators'), StatusCodes.NOT_FOUND);
