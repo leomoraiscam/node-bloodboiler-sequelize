@@ -226,3 +226,42 @@ describe('GET /users', () => {
     );
   });
 });
+
+describe('DELETE /movies/:id', () => {
+  test('Should delete an movues', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleUserAdmin = {
+      idUser: user.body.id,
+      admin: 1,
+    };
+
+    const admin = await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
+    const response = await request(app)
+      .delete(`${baseURL}/administrators/${admin.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    const response = await request(app)
+      .delete(`${baseURL}/administrators/1234`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});

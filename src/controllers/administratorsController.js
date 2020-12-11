@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const { adminstratorsRepository } = require('../repositories');
 const { administratorsService } = require('../services');
 const { catchAsync } = require('../utils');
 
@@ -37,5 +38,12 @@ module.exports = {
     const administrator = await administratorsService.create(body);
 
     return response.status(StatusCodes.CREATED).json(administrator);
+  }),
+  destroy: catchAsync(async (req, res) => {
+    const { id } = req.params;
+
+    await administratorsService.destroy(id);
+
+    return res.status(StatusCodes.NO_CONTENT).end();
   }),
 };
