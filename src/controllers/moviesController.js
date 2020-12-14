@@ -41,9 +41,8 @@ module.exports = {
   }),
   destroy: catchAsync(async (request, response) => {
     const { id } = request.params;
-    let deletedAt = new Date();
 
-    await moviesService.destroy(deletedAt, id);
+    await moviesService.destroy(id);
 
     return response
       .status(StatusCodes.NO_CONTENT)
