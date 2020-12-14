@@ -2,7 +2,8 @@ const { Administrator } = require('../models');
 
 module.exports = {
   list: (query) => Administrator.findAndCountAll(query),
-  getById: (id) => Administrator.findByPk(id),
   get: (params) => Administrator.findOne({ where: params }),
+  getById: (id) => Administrator.findByPk(id),
   create: (params) => Administrator.create(params),
+  destroy: (id) => Administrator.destroy({ where: { id } }),
 };

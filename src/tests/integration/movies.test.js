@@ -230,3 +230,46 @@ describe('GET /movies', () => {
     );
   });
 });
+
+describe('DELETE /movies/:id', () => {
+  test('Should delete an movues', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const SampleMovie = {
+      name: 'matrix 052',
+      director: faker.name.findName(),
+      author: faker.name.findName(),
+      genre: 'action',
+      createdBy: user.body.id,
+      updatedBy: user.body.id,
+    };
+
+    const movie = await request(app)
+      .post(`${baseURL}/movies`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(SampleMovie);
+
+    const response = await request(app)
+      .delete(`${baseURL}/movies/${movie.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    const response = await request(app)
+      .delete(`${baseURL}/movies/1234`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});

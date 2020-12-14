@@ -8,5 +8,6 @@ const {
 router.get('/', isAuthorized, validate(movies.list), moviesController.list);
 router.get('/:id', isAuthorized, moviesController.index);
 router.post('/', isAuthorized, validate(movies.create), moviesController.create);
+router.delete('/:id', isAuthorized, moviesController.destroy);
 
 module.exports.movies = router;

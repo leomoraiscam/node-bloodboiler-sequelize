@@ -39,4 +39,14 @@ module.exports = {
 
     return response.status(StatusCodes.CREATED).json(movie);
   }),
+  destroy: catchAsync(async (request, response) => {
+    const { id } = request.params;
+
+    await moviesService.destroy(id);
+
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
+  }),
 };
