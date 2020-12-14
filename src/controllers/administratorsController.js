@@ -38,4 +38,16 @@ module.exports = {
 
     return response.status(StatusCodes.CREATED).json(administrator);
   }),
+  update: catchAsync(async (request, response) => {
+    const {
+      params: { id },
+      body,
+    } = request;
+
+    console.log('bdy ctrl', body);
+
+    const administrator = await administratorsService.update(id, body);
+
+    return response.status(StatusCodes.OK).json(administrator);
+  }),
 };

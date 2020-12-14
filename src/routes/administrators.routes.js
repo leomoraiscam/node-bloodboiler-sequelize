@@ -8,5 +8,6 @@ const {
 router.get('/:id', isAuthorized, administratorsController.index);
 router.get('/', isAuthorized, validate(administrators.list), administratorsController.list);
 router.post('/', isAuthorized, validate(administrators.create), administratorsController.create);
+router.put('/', isAuthorized, administratorsController.update);
 
 module.exports.administrators = router;
