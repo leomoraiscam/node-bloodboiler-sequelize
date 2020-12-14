@@ -44,6 +44,9 @@ module.exports = {
 
     await administratorsService.destroy(id);
 
-    return res.status(StatusCodes.NO_CONTENT).end();
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
   }),
 };

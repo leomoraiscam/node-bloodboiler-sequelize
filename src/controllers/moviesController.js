@@ -44,6 +44,9 @@ module.exports = {
 
     await moviesService.destroy(id);
 
-    return response.status(StatusCodes.NO_CONTENT).end();
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
   }),
 };
