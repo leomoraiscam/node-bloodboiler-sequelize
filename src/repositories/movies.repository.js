@@ -9,7 +9,7 @@ module.exports = {
   getById: (id) => Movies.findByPk(id),
   create: (params) => Movies.create(params),
   destroy: (id) =>
-    Movies.update({
+    Movies.destroy({
       where: {
         id,
       },
