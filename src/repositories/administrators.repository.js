@@ -14,4 +14,8 @@ module.exports = {
         id,
       },
     }),
+  destroy: (id) =>
+    Administrator.destroy({
+      where: { id },
+    }),
 };

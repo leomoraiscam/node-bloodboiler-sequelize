@@ -1,7 +1,4 @@
-const { request } = require('express');
 const { StatusCodes } = require('http-status-codes');
-const { response } = require('../config/express');
-const moviesRepository = require('../repositories/movies.repository');
 const { moviesService } = require('../services');
 const { catchAsync } = require('../utils');
 
@@ -49,5 +46,15 @@ module.exports = {
     const movie = await moviesService.update(id, body);
 
     return response.status(StatusCodes.OK).json(movie);
+  }),
+  destroy: catchAsync(async (request, response) => {
+    const { id } = request.params;
+
+    await moviesService.destroy(id);
+
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
   }),
 };

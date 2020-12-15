@@ -14,4 +14,10 @@ module.exports = {
         id,
       },
     }),
+  destroy: (id) =>
+    Movies.destroy({
+      where: {
+        id,
+      },
+    }),
 };
