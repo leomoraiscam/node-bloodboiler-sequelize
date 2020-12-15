@@ -37,7 +37,6 @@ module.exports = {
     const finalbody = {
       ...body,
       createdBy: session.id,
-      updatedBy: session.id,
     };
 
     const movie = await moviesService.create(finalbody);
@@ -53,7 +52,6 @@ module.exports = {
 
     const finalbody = {
       ...body,
-      createdBy: session.id,
       updatedBy: session.id,
     };
 
