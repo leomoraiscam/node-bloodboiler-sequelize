@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const { adminstratorsRepository } = require('../repositories');
 const { administratorsService } = require('../services');
 const { catchAsync } = require('../utils');
 

@@ -4,15 +4,13 @@ const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
 
 module.exports = {
-  update: async (id, body) => {
+  destroy: async (id) => {
     const movie = await moviesRepository.getById(id);
 
     if (!movie) {
       throw new ApplicationError(messages.notFound('movie'), StatusCodes.NOT_FOUND);
     }
 
-    await moviesRepository.update(body, id);
-
-    return body;
+    return moviesRepository.destroy(id);
   },
 };
