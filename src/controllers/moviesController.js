@@ -33,7 +33,14 @@ module.exports = {
   }),
   create: catchAsync(async (request, response) => {
     const { body } = request;
-    const movie = await moviesService.create(body);
+
+    const finalbody = {
+      ...body,
+      createdBy: session.id,
+      updatedBy: session.id,
+    };
+
+    const movie = await moviesService.create(finalbody);
 
     return response.status(StatusCodes.CREATED).json(movie);
   }),
@@ -44,7 +51,13 @@ module.exports = {
       body,
     } = request;
 
-    await moviesService.update(id, body, (id_session = session.id));
+    const finalbody = {
+      ...body,
+      createdBy: session.id,
+      updatedBy: session.id,
+    };
+
+    await moviesService.update(id, finalbody);
 
     return response
       .status(StatusCodes.NO_CONTENT)

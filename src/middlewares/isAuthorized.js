@@ -35,8 +35,7 @@ module.exports = catchAsync(async (req, res, next) => {
   if (!accessToken) {
     throw new ApplicationError(messages.notFound('token'), StatusCodes.NOT_FOUND);
   }
-  const { id } = decoded.sub;
-  req.session = { token, id, email: decoded.email };
+  req.session = { token, id: decoded.id, email: decoded.email };
 
   next();
 });
