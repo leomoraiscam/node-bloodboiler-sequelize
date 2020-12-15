@@ -1,6 +1,7 @@
 const { request } = require('express');
 const { StatusCodes } = require('http-status-codes');
 const { response } = require('../config/express');
+const moviesRepository = require('../repositories/movies.repository');
 const { moviesService } = require('../services');
 const { catchAsync } = require('../utils');
 
@@ -38,5 +39,15 @@ module.exports = {
     const movie = await moviesService.create(body);
 
     return response.status(StatusCodes.CREATED).json(movie);
+  }),
+  update: catchAsync(async (request, response) => {
+    const {
+      params: { id },
+      body,
+    } = request;
+
+    const movie = await moviesService.update(id, body);
+
+    return response.status(StatusCodes.OK).json(movie);
   }),
 };

@@ -44,8 +44,6 @@ module.exports = {
       body,
     } = request;
 
-    console.log('bdy ctrl', body);
-
     const administrator = await administratorsService.update(id, body);
 
     return response.status(StatusCodes.OK).json(administrator);
