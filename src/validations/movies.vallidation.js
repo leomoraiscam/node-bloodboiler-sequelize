@@ -39,15 +39,6 @@ const update = {
   body: yup.object().shape({
     name: yup.string().required(),
     director: yup.string().required(),
-    createdBy: yup
-      .number()
-      .positive()
-      .required(),
-    author: yup.string().required(),
-    updatedBy: yup
-      .number()
-      .positive()
-      .required(),
     author: yup.string().required(),
     genre: yup.string().required(),
   }),

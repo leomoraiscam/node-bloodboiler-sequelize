@@ -40,10 +40,11 @@ module.exports = {
   update: catchAsync(async (request, response) => {
     const {
       params: { id },
+      session,
       body,
     } = request;
 
-    await moviesService.update(id, body);
+    await moviesService.update(id, body, (id_session = session.id));
 
     return response
       .status(StatusCodes.NO_CONTENT)

@@ -2,7 +2,6 @@ const { StatusCodes } = require('http-status-codes');
 const { adminstratorsRepository } = require('../../repositories');
 const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
-const { use } = require('../../utils/nodemailer');
 
 module.exports = {
   update: async (id, body) => {
