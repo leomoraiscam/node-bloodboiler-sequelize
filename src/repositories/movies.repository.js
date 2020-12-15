@@ -8,8 +8,8 @@ module.exports = {
       where: params,
     }),
   create: (params) => Movies.create(params),
-  update: (movie, id) =>
-    Movies.update(movie, {
+  update: (args, id) =>
+    Movies.update(args, {
       where: {
         id,
       },

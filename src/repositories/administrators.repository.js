@@ -8,8 +8,8 @@ module.exports = {
       where: params,
     }),
   create: (params) => Administrator.create(params),
-  update: (user, id) =>
-    Administrator.update(user, {
+  update: (args, id) =>
+    Administrator.update(args, {
       where: {
         id,
       },
