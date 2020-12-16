@@ -4,15 +4,6 @@ const create = {
   body: yup.object().shape({
     name: yup.string().required(),
     director: yup.string().required(),
-    createdBy: yup
-      .number()
-      .positive()
-      .required(),
-    author: yup.string().required(),
-    updatedBy: yup
-      .number()
-      .positive()
-      .required(),
     author: yup.string().required(),
     genre: yup.string().required(),
   }),
@@ -35,7 +26,17 @@ const list = {
   }),
 };
 
+const update = {
+  body: yup.object().shape({
+    name: yup.string().required(),
+    director: yup.string().required(),
+    author: yup.string().required(),
+    genre: yup.string().required(),
+  }),
+};
+
 module.exports.movies = {
   create,
   list,
+  update,
 };

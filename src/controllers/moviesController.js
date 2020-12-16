@@ -1,6 +1,4 @@
-const { request } = require('express');
 const { StatusCodes } = require('http-status-codes');
-const { response } = require('../config/express');
 const { moviesService } = require('../services');
 const { catchAsync } = require('../utils');
 
@@ -35,9 +33,34 @@ module.exports = {
   }),
   create: catchAsync(async (request, response) => {
     const { body } = request;
-    const movie = await moviesService.create(body);
+
+    const finalbody = {
+      ...body,
+      createdBy: session.id,
+    };
+
+    const movie = await moviesService.create(finalbody);
 
     return response.status(StatusCodes.CREATED).json(movie);
+  }),
+  update: catchAsync(async (request, response) => {
+    const {
+      params: { id },
+      session,
+      body,
+    } = request;
+
+    const finalbody = {
+      ...body,
+      updatedBy: session.id,
+    };
+
+    await moviesService.update(id, finalbody);
+
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
   }),
   destroy: catchAsync(async (request, response) => {
     const { id } = request.params;

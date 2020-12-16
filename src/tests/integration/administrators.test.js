@@ -227,6 +227,78 @@ describe('GET /users', () => {
   });
 });
 
+describe('PUT /administrators', () => {
+  test('Should update an user administrators', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleUserAdmin = {
+      idUser: user.body.id,
+      admin: 1,
+    };
+
+    const administrator = await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
+    const SampleNewDataOfAdministrator = {
+      id: administrator.body.id,
+      admin: 1,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(SampleNewDataOfAdministrator);
+
+    expect(response.status).toBe(StatusCodes.OK);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleUserAdmin = {
+      idUser: user.body.id,
+      admin: 1,
+    };
+
+    await request(app)
+      .post(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleUserAdmin);
+
+    const params = {
+      id: 1234,
+      admin: 1,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/administrators`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(params);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});
+
 describe('DELETE /movies/:id', () => {
   test('Should delete an movues', async () => {
     sampleUser = {

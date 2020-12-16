@@ -30,7 +30,18 @@ const create = {
   }),
 };
 
+const update = {
+  body: yup.object().shape({
+    id: yup
+      .number()
+      .positive()
+      .required(),
+    admin: yup.number().required(),
+  }),
+};
+
 module.exports.administrators = {
   list,
   create,
+  update,
 };
