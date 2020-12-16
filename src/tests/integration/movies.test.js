@@ -231,6 +231,69 @@ describe('GET /movies', () => {
   });
 });
 
+describe('PUT /movies', () => {
+  test('Should update an movie', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const SampleMovie = {
+      name: faker.name.findName(),
+      director: faker.name.findName(),
+      author: faker.name.findName(),
+      genre: 'action',
+      createdBy: user.body.id,
+      updatedBy: user.body.id,
+    };
+
+    const movie = await request(app)
+      .post(`${baseURL}/movies`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(SampleMovie);
+
+    const SampleNewMovie = {
+      name: faker.name.findName(),
+      director: faker.name.findName(),
+      author: faker.name.findName(),
+      genre: 'action',
+      createdBy: user.body.id,
+      updatedBy: user.body.id,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/movies/${movie.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(SampleNewMovie);
+
+    expect(response.status).toBe(StatusCodes.OK);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    const SampleNewMovie = {
+      name: faker.name.findName(),
+      director: faker.name.findName(),
+      author: faker.name.findName(),
+      genre: 'action',
+      createdBy: 1,
+      updatedBy: 1,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/movies/1234`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(SampleNewMovie);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});
+
 describe('DELETE /movies/:id', () => {
   test('Should delete an movues', async () => {
     sampleUser = {
