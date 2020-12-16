@@ -260,7 +260,7 @@ describe('PUT /administrators', () => {
       .set('Authorization', `Bearer ${authToken}`)
       .send(SampleNewDataOfAdministrator);
 
-    expect(response.status).toBe(StatusCodes.OK);
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
   });
 
   test('Should return 404 - Not Found', async () => {

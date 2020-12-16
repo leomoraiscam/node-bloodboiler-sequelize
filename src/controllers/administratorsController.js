@@ -51,8 +51,8 @@ module.exports = {
       .set({ 'Content-Length': '0' })
       .end();
   }),
-  destroy: catchAsync(async (req, res) => {
-    const { id } = req.params;
+  destroy: catchAsync(async (request, response) => {
+    const { id } = request.params;
 
     await administratorsService.destroy(id);
 

@@ -98,7 +98,7 @@ describe('Movies Endpoints', () => {
 describe('GET /movies', () => {
   test('Should return a list of movies and metadata', async () => {
     const page = 1;
-    const perPage = 3;
+    const perPage = 10;
     const sortBy = 'createdAt:asc';
 
     sampleUser = {
@@ -272,7 +272,7 @@ describe('PUT /movies', () => {
       .set('Authorization', `Bearer ${authToken}`)
       .send(SampleNewMovie);
 
-    expect(response.status).toBe(StatusCodes.OK);
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
   });
 
   test('Should return 404 - Not Found', async () => {
