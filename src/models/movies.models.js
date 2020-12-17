@@ -2,10 +2,22 @@ module.exports = (sequelize, DataTypes) => {
   const Movies = sequelize.define(
     'Movies',
     {
-      name: { type: DataTypes.STRING, allowNull: false },
-      director: { type: DataTypes.STRING, allowNull: false },
-      author: { type: DataTypes.STRING, allowNull: false },
-      genre: { type: DataTypes.STRING, allowNull: false },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      director: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      author: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      genre: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       createdBy: {
         type: DataTypes.INTEGER,
         field: 'created_by_user_id',

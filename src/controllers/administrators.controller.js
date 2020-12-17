@@ -3,34 +3,26 @@ const { administratorsService } = require('../services');
 const { catchAsync } = require('../utils');
 
 module.exports = {
-  index: catchAsync(async (request, response) => {
+  list: catchAsync(async (request, response) => {
+    const { page, perPage, sortBy } = request.query;
+
+    const administrators = await administratorsService.list({
+      page,
+      perPage,
+      sortBy,
+    });
+
+    return response.status(StatusCodes.OK).json(administrators);
+  }),
+
+  get: catchAsync(async (request, response) => {
     const { id } = request.params;
 
     const administrator = await administratorsService.get(id);
 
-    if (!administrator) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
-
     return response.status(StatusCodes.OK).json(administrator);
   }),
-  list: catchAsync(async (request, response) => {
-    const { page, perPage, sortBy } = request.query;
 
-    const administrators = await administratorsService.list({ page, perPage, sortBy });
-
-    if (!administrators || administrators.data.length === 0) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
-
-    return response.status(StatusCodes.OK).json(administrators);
-  }),
   create: catchAsync(async (request, response) => {
     const { body } = request;
 
@@ -38,6 +30,7 @@ module.exports = {
 
     return response.status(StatusCodes.CREATED).json(administrator);
   }),
+
   update: catchAsync(async (request, response) => {
     const {
       params: { id },
@@ -51,6 +44,7 @@ module.exports = {
       .set({ 'Content-Length': '0' })
       .end();
   }),
+
   destroy: catchAsync(async (request, response) => {
     const { id } = request.params;
 

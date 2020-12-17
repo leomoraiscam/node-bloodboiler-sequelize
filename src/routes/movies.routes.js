@@ -6,7 +6,7 @@ const {
 } = require('../validations');
 
 router.get('/', isAuthorized, validate(movies.list), moviesController.list);
-router.get('/:id', isAuthorized, moviesController.index);
+router.get('/:id', isAuthorized, moviesController.get);
 router.post('/', isAuthorized, validate(movies.create), moviesController.create);
 router.put('/:id', isAuthorized, validate(movies.update), moviesController.update);
 router.delete('/:id', isAuthorized, moviesController.destroy);
