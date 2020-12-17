@@ -32,9 +32,10 @@ module.exports = {
     return response.status(StatusCodes.OK).json(movies);
   }),
   create: catchAsync(async (request, response) => {
-    const { body, session } = request;
-
-    const { id } = session;
+    const {
+      body,
+      session: { id },
+    } = request;
 
     const finalbody = {
       ...body,
