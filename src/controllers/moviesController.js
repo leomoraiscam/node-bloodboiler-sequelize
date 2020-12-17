@@ -20,7 +20,7 @@ module.exports = {
   list: catchAsync(async (request, response) => {
     const { page, perPage, sortBy } = request.query;
 
-    const movies = await moviesService.index({ page, perPage, sortBy });
+    const movies = await moviesService.list({ page, perPage, sortBy });
 
     if (movies.data.length === 0) {
       return response
@@ -32,11 +32,15 @@ module.exports = {
     return response.status(StatusCodes.OK).json(movies);
   }),
   create: catchAsync(async (request, response) => {
-    const { body } = request;
+    const {
+      body,
+      session: { id },
+    } = request;
 
     const finalbody = {
       ...body,
-      createdBy: session.id,
+      createdBy: id,
+      updatedBy: id,
     };
 
     const movie = await moviesService.create(finalbody);

@@ -2,7 +2,7 @@ const { moviesRepository } = require('../../repositories');
 const { queryHelper } = require('../../helpers');
 
 module.exports = {
-  index: async (options) => {
+  list: async (options) => {
     const query = queryHelper(options);
 
     const { count, rows } = await moviesRepository.list(query);
