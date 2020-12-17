@@ -12,13 +12,6 @@ module.exports = {
       sortBy,
     });
 
-    if (!administrators || !administrators.data.length) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
-
     return response.status(StatusCodes.OK).json(administrators);
   }),
 
@@ -26,13 +19,6 @@ module.exports = {
     const { id } = request.params;
 
     const administrator = await administratorsService.get(id);
-
-    if (!administrator) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
 
     return response.status(StatusCodes.OK).json(administrator);
   }),

@@ -12,13 +12,6 @@ module.exports = {
       sortBy,
     });
 
-    if (!movies || !movies.data.length) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
-
     return response.status(StatusCodes.OK).json(movies);
   }),
 
@@ -26,13 +19,6 @@ module.exports = {
     const { id } = request.params;
 
     const movie = await moviesService.get(id);
-
-    if (!movie) {
-      return response
-        .status(StatusCodes.NO_CONTENT)
-        .set({ 'Content-Length': '0' })
-        .end();
-    }
 
     return response.status(StatusCodes.OK).json(movie);
   }),
