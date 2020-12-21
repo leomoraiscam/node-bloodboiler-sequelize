@@ -2,11 +2,30 @@ module.exports = (sequelize, DataTypes) => {
   const Addresses = sequelize.define(
     'Addresses',
     {
-      rua: DataTypes.STRING,
-      bairro: DataTypes.STRING,
-      complemento: DataTypes.STRING,
-      cidade: DataTypes.STRING,
-      uf: DataTypes.STRING,
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      neighborhood: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      complement: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      uf: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      zipCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       idUser: {
         type: DataTypes.INTEGER,
         field: 'id_user',

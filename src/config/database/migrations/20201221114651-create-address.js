@@ -7,15 +7,15 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      rua: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      bairro: {
+      neighborhood: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      complemento: {
+      complement: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cep: {
+      zipCode: {
         type: Sequelize.STRING,
         allowNull: false,
       },
