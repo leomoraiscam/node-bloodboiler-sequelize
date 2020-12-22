@@ -6,12 +6,6 @@ const { messages } = require('../../helpers');
 
 module.exports = {
   create: async (params) => {
-    const address = await getInfoByCep(params.zipCode);
-
-    if (!address) {
-      throw new ApplicationError(messages.notFound('address'), StatusCodes.NOT_FOUND);
-    }
-
     const user = await usersRepository.getById(params.idUser);
 
     if (!user) {
