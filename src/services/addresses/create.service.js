@@ -19,12 +19,12 @@ module.exports = {
     }
 
     const createAddress = await addressesRepository.create({
-      zipCode: address.cep,
-      street: address.logradouro,
-      complement: address.complemento,
-      neighborhood: address.bairro,
-      city: address.localidade,
-      uf: address.uf,
+      zipCode: params.zipCode,
+      street: params.street,
+      complement: params.complement,
+      neighborhood: params.neighborhood,
+      city: params.city,
+      uf: params.uf,
       idUser: user.id,
       number: params.number,
     });
