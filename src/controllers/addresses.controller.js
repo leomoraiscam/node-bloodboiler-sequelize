@@ -10,4 +10,11 @@ module.exports = {
 
     return response.status(StatusCodes.OK).json(address);
   }),
+  create: catchAsync(async (request, response) => {
+    const { body } = request;
+
+    const address = await addressesServives.create(body);
+
+    return response.status(StatusCodes.CREATED).json(address);
+  }),
 };
