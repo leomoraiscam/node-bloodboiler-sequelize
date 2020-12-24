@@ -13,7 +13,7 @@ module.exports = {
     });
 
     if (!movies || movies.data.length === 0) {
-      return res
+      return response
         .status(StatusCodes.NO_CONTENT)
         .set({ 'Content-Length': '0' })
         .end();
