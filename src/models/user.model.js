@@ -25,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
+  User.associate = function associate(models) {
+    models.User.hasMany(models.Votes, {
+      foreignKey: 'idUser',
+    });
+  };
+
   User.beforeSave(async (user, options) => {
     const password = await encryptor.hashPassword(user.password);
     if (user.changed('password')) {
