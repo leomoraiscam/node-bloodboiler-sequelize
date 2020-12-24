@@ -12,6 +12,13 @@ module.exports = {
       sortBy,
     });
 
+    if (!movies || movies.data.length === 0) {
+      return res
+        .status(StatusCodes.NO_CONTENT)
+        .set({ 'Content-Length': '0' })
+        .end();
+    }
+
     return response.status(StatusCodes.OK).json(movies);
   }),
   create: catchAsync(async (request, response) => {
