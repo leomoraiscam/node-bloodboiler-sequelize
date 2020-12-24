@@ -1,4 +1,3 @@
-const { getInfoByCep } = require('../api/viacep');
 const { addressesRepository, usersRepository } = require('../../repositories');
 const { ApplicationError } = require('../../utils');
 const { StatusCodes } = require('http-status-codes');
@@ -10,6 +9,15 @@ module.exports = {
 
     if (!user) {
       throw new ApplicationError(messages.notFound('users'), StatusCodes.NOT_FOUND);
+    }
+
+    const existAddress = await addressesRepository.get({
+      zip_code: String(params.zipCode),
+      idUser: user.id,
+    });
+
+    if (existAddress) {
+      throw new ApplicationError(messages.alreadyExists('address'), StatusCodes.CONFLICT);
     }
 
     const createAddress = await addressesRepository.create({
