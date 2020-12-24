@@ -54,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
     models.Movies.belongsTo(models.Administrator, {
       foreignKey: 'updatedBy',
     });
+    models.Movies.belongsTo(models.Votes, {
+      foreignKey: 'movie_id',
+      as: 'movies_votes',
+    });
   };
 
   return Movies;
