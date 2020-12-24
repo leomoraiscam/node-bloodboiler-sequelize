@@ -6,6 +6,6 @@ const {
 } = require('../validations');
 
 router.get('/', validate(votes.list), votesController.list);
-router.post('/', validate(votes.list), votesController.create);
+router.post('/', validate(votes.create), votesController.create);
 
 module.exports.votes = router;

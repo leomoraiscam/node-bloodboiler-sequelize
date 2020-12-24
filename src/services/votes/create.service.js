@@ -4,18 +4,16 @@ const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
 
 module.exports.create = async (params) => {
-  console.log(params);
-
   const userExist = await usersRepository.getById(params.idUser);
 
   if (!userExist) {
-    throw new ApplicationError(messages.notFound('user'), StatusCodes.CONFLICT);
+    throw new ApplicationError(messages.notFound('user'), StatusCodes.NOT_FOUND);
   }
 
   const movieExist = await moviesRepository.getById(params.idMovie);
 
   if (!movieExist) {
-    throw new ApplicationError(messages.notFound('movie'), StatusCodes.CONFLICT);
+    throw new ApplicationError(messages.notFound('movie'), StatusCodes.NOT_FOUND);
   }
 
   const existVoteByUserForMovie = await votesRepository.get({

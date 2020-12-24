@@ -17,6 +17,24 @@ const list = {
   }),
 };
 
+const create = {
+  body: yup.object().shape({
+    idUser: yup
+      .number()
+      .positive()
+      .required(),
+    idMovie: yup
+      .number()
+      .positive()
+      .required(),
+    note: yup
+      .number()
+      .positive()
+      .required(),
+  }),
+};
+
 module.exports.votes = {
   list,
+  create,
 };
