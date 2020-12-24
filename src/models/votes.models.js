@@ -34,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     models.Votes.belongsTo(models.User, {
       foreignKey: 'idUser',
     });
+    models.Movies.belongsTo(models.Votes, {
+      foreignKey: 'idMovie',
+    });
   };
 
   return Votes;
