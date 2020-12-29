@@ -5,8 +5,6 @@ const { messages } = require('../../helpers');
 
 module.exports = {
   update: async (id, body) => {
-    console.log(id);
-
     const address = await addressesRepository.getById(id);
 
     if (!address) {
@@ -14,7 +12,5 @@ module.exports = {
     }
 
     await addressesRepository.update(body, address.id);
-
-    return body;
   },
 };
