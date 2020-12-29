@@ -11,6 +11,6 @@ module.exports = {
       throw new ApplicationError(messages.notFound('address'), StatusCodes.NOT_FOUND);
     }
 
-    await addressesRepository.update(body, address.id);
+    return await addressesRepository.update(body, address.id);
   },
 };
