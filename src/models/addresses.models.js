@@ -52,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
   Addresses.associate = function associate(models) {
     models.Administrator.belongsTo(models.User, {
       foreignKey: 'idUser',
+      as: 'address',
     });
   };
 

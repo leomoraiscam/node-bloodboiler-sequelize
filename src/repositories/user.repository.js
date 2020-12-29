@@ -1,4 +1,4 @@
-const { User, Administrator } = require('../models');
+const { User, Administrator, Addresses } = require('../models');
 
 module.exports = {
   list: (query) =>
@@ -9,6 +9,11 @@ module.exports = {
           model: Administrator,
           as: 'administrator',
           attributes: ['id', 'admin'],
+        },
+        {
+          model: Addresses,
+          as: 'addresses',
+          attributes: ['street', 'neighborhood', 'complement', 'city', 'uf', 'zipCode', 'number'],
         },
       ],
     }),
