@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     models.User.hasMany(models.Votes, {
       foreignKey: 'idUser',
     });
+    models.User.hasOne(models.Administrator, {
+      foreignKey: 'idUser',
+      as: 'administrator',
+    });
   };
 
   User.beforeSave(async (user, options) => {
