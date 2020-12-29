@@ -17,4 +17,28 @@ module.exports = {
 
     return response.status(StatusCodes.CREATED).json(address);
   }),
+  update: catchAsync(async (request, response) => {
+    const {
+      params: { id },
+      body,
+    } = request;
+
+    await addressesServives.update(id, body);
+
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
+  }),
+
+  destroy: catchAsync(async (request, response) => {
+    const { id } = request.params;
+
+    await addressesServives.destroy(id);
+
+    return response
+      .status(StatusCodes.NO_CONTENT)
+      .set({ 'Content-Length': '0' })
+      .end();
+  }),
 };

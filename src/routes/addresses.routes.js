@@ -7,5 +7,7 @@ const {
 
 router.get('/:cep', isAuthorized, addressesController.get);
 router.post('/', isAuthorized, validate(addresses.create), addressesController.create);
+router.put('/:id', isAuthorized, addressesController.update);
+router.delete('/:id', isAuthorized, addressesController.destroy);
 
 module.exports.addresses = router;
