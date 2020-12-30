@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
   Addresses.associate = function associate(models) {
     models.Addresses.belongsTo(models.User, {
       foreignKey: 'idUser',
-      as: 'address',
+      as: 'user',
     });
   };
 
