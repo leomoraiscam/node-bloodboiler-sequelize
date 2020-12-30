@@ -6,7 +6,7 @@ const {
 } = require('../validations');
 const { isAdministrators } = require('../middlewares');
 
-router.get('/', isAuthorized, isAdministrators, validate(administrators.list), administratorsController.list);
+router.get('/', isAuthorized, validate(administrators.list), administratorsController.list);
 router.get('/:id', isAuthorized, administratorsController.get);
 router.post('/', isAuthorized, validate(administrators.create), administratorsController.create);
 router.put('/', isAuthorized, validate(administrators.update), administratorsController.update);

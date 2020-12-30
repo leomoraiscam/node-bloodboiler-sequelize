@@ -1,10 +1,12 @@
 const { usersRepository } = require('../../repositories');
 const { queryHelper } = require('../../helpers');
+const { Administrator } = require('../../models');
 
 module.exports.list = async (options) => {
   const query = queryHelper(options);
 
   const { count, rows } = await usersRepository.list(query);
+
   const totalPages = Math.ceil(count / options.perPage);
 
   return {

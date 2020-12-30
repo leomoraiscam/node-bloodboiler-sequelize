@@ -3,10 +3,9 @@ const request = require('supertest');
 const { StatusCodes } = require('http-status-codes');
 const app = require('../../config/express');
 const { version } = require('../../config/env');
-const { messages } = require('../../helpers');
 
 const { createSampleUsers, createSampleUser } = require('../fixtures/users.fixtures');
-const { generateSampleToken, generateSampleInvalidToken } = require('../fixtures/auth.fixtures');
+const { generateSampleToken } = require('../fixtures/auth.fixtures');
 
 const baseURL = `/api/${version}`;
 
@@ -22,7 +21,7 @@ beforeAll(async () => {
 
 describe('Administrators users Endpoints', () => {
   describe('POST /addresses', () => {
-    test('Should create an addres for user existent', async () => {
+    test('Should create an addres for user existent and the return should be sucess', async () => {
       sampleUser = {
         name: faker.name.findName(),
         email: faker.internet.email(),
@@ -53,7 +52,7 @@ describe('Administrators users Endpoints', () => {
       expect(response.status).toBe(StatusCodes.CREATED);
     });
 
-    test('Should return 409 - Conflict', async () => {
+    test('Should fail to create a addres existing and the return should conflict', async () => {
       sampleUser = {
         name: faker.name.findName(),
         email: faker.internet.email(),
@@ -89,7 +88,7 @@ describe('Administrators users Endpoints', () => {
       expect(response.status).toBe(StatusCodes.CONFLICT);
     });
 
-    test('Should return 400 - Not Found', async () => {
+    test('Should fail to create a address for a user doesnt exist and return user not found', async () => {
       const mainSampleAddress = {
         zipCode: '36083571',
         street: 'Rua Sylvio Ribeiro Aragão',
@@ -112,7 +111,7 @@ describe('Administrators users Endpoints', () => {
 });
 
 describe('GET /users', () => {
-  test('Should return 200 - Sucess', async () => {
+  test('Should return an address according to the zip code entered and return should be sucess', async () => {
     const zipcode = '36083571';
 
     const response = await request(app)
