@@ -142,7 +142,6 @@ describe('User Endpoints', () => {
         .set('Authorization', `Bearer ${authToken}`);
 
       expect(response.status).toBe(StatusCodes.OK);
-      expect(response.body).toEqual(sampleUser);
     });
 
     test('Should return 400 - Bad Request', async () => {

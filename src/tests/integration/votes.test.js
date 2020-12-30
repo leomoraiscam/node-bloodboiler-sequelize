@@ -7,6 +7,7 @@ const { messages } = require('../../helpers');
 
 const { createSampleUsers, createSampleUser } = require('../fixtures/users.fixtures');
 const { generateSampleToken, generateSampleInvalidToken } = require('../fixtures/auth.fixtures');
+const { fake } = require('faker');
 
 const baseURL = `/api/${version}`;
 
@@ -35,7 +36,7 @@ describe('Votes Endpoints', () => {
         .send(sampleUser);
 
       const SampleMovie = {
-        name: 'matrix',
+        name: faker.name.findName(),
         director: faker.name.findName(),
         author: faker.name.findName(),
         genre: 'action',
@@ -103,8 +104,6 @@ describe('Votes Endpoints', () => {
         .post(`${baseURL}/votes`)
         .set('Authorization', `Bearer ${authToken}`)
         .send(vote);
-
-      console.log(response.body);
 
       expect(response.status).toBe(StatusCodes.CONFLICT);
     });
