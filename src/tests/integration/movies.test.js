@@ -190,8 +190,8 @@ describe('GET /movies', () => {
   });
 
   test('Should return 204 - No Content', async () => {
-    const page = 2;
-    const perPage = 3;
+    const page = 10;
+    const perPage = 10;
 
     const response = await request(app)
       .get(`${baseURL}/movies?page=${page}&perPage=${perPage}`)

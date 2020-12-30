@@ -188,8 +188,9 @@ describe('GET /users', () => {
   });
 
   test('Should return 204 - No Content', async () => {
-    const page = 5;
+    const page = 10;
     const perPage = 10;
+
     const response = await request(app)
       .get(`${baseURL}/administrators?page=${page}&perPage=${perPage}`)
       .set('Authorization', `Bearer ${authToken}`);

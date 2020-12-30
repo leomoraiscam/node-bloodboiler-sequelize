@@ -33,6 +33,7 @@ module.exports = {
       include: [
         {
           model: Administrator,
+          as: 'administrator',
           attributes: ['id', 'admin'],
         },
       ],
