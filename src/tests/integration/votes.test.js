@@ -8,6 +8,7 @@ const { messages } = require('../../helpers');
 const { createSampleUsers, createSampleUser } = require('../fixtures/users.fixtures');
 const { generateSampleToken, generateSampleInvalidToken } = require('../fixtures/auth.fixtures');
 const { fake } = require('faker');
+const votes = require('../../services/votes');
 
 const baseURL = `/api/${version}`;
 
@@ -120,6 +121,7 @@ describe('Votes Endpoints', () => {
         .set('Authorization', `Bearer ${authToken}`)
         .send(vote);
 
+      console.log('test', response.body);
       expect(response.status).toBe(StatusCodes.NOT_FOUND);
     });
   });
