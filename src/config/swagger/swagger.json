@@ -25,6 +25,18 @@
     },
     {
       "name": "User"
+    },
+    {
+      "name": "Administrator"
+    },
+    {
+      "name": "Address"
+    },
+    {
+      "name": "Movie"
+    },
+    {
+      "name": "Vote"
     }
   ],
   "paths": {
@@ -706,6 +718,1211 @@
         },
         "tags": ["User"]
       }
+    },
+    "/administrators/": {
+      "summary": "Administrator CRUD",
+      "get": {
+        "description": "Returns a list of all administrator users registered with pagination",
+        "summary": "Returns a list of all administrator users registered with pagination",
+        "security": [{ "BearerToken": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The page to be returned"
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The number of documents to limit per page"
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sort order of the documents returned, ex: createdAt:desc. Format: attribute:value -> ['asc', 'desc']"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of administrator users with metadata details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "metadata": {
+                    "total": 1,
+                    "totalPages": 1
+                  },
+                  "data": [
+                    {
+                      "id": 1,
+                      "admin": 1,
+                      "idUser": 1,
+                      "createdAt": "2020-04-16T23:00:45.179Z",
+                      "updatedAt": "2020-04-16T23:41:38.451Z",
+                      "user": {
+                        "name": "John Doe",
+                        "email": "johndoe@ioasys.com.br"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No administrators users were found for the used criteria"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Administrator"]
+      },
+      "post": {
+        "summary": "Creates an administrator user",
+        "description": "Creates an administrator user in the application",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idUser": {
+                    "type": "integer"
+                  },
+                  "admin": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "idUser": 5,
+                "admin": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succesfully creates a new administrator user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 3,
+                  "idUser": 5,
+                  "admin": 1,
+                  "updatedAt": "2020-12-31T17:08:27.972Z",
+                  "createdAt": "2020-12-31T17:08:27.972Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The administrator is already registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Administrator already exist"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Administrator"]
+      }
+    },
+    "/administrators/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Administrator id",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "description": "Returns the administrator user's data",
+        "summary": "Returns the administrator user's data",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "200": {
+            "description": "Return a administrator user based on its id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 1,
+                  "admin": 1,
+                  "idUser": 2,
+                  "createdAt": "2020-04-16T23:00:45.179Z",
+                  "updatedAt": "2020-04-16T23:41:38.451Z",
+                  "user": {
+                    "name": "John Doe",
+                    "email": "johndoe@ioasys.com.br"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No administrator user was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Administrator Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Administrator"]
+      },
+      "patch": {
+        "description": "Updates the administrator user's information",
+        "summary": "Updates the administrator user's information",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idUser": {
+                    "type": "integer"
+                  },
+                  "admin": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 1,
+                "admin": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No administrator user was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Administrator Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Administrator"]
+      },
+      "delete": {
+        "summary": "Deletes the administrator user from the application",
+        "description": "Deletes the administrator user from the application",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No administrator user was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Administrator Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Administrator"]
+      }
+    },
+    "/addresses/": {
+      "summary": "Users CRUD",
+      "post": {
+        "summary": "Creates an addres for a user",
+        "description": "Creates an addres for a user in the application",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "zipCode": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "complement": {
+                    "type": "string"
+                  },
+                  "neighborhood": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "uf": {
+                    "type": "string"
+                  },
+                  "idUser": {
+                    "type": "integer"
+                  },
+                  "number": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 23,
+                "zipCode": "36083-571",
+                "street": "Rua Halfed",
+                "complement": "proximo ao parque",
+                "neighborhood": "centro",
+                "city": "Juiz de Fora",
+                "uf": "MG",
+                "idUser": 2,
+                "number": 60,
+                "updatedAt": "2020-12-29T14:00:34.782Z",
+                "createdAt": "2020-12-29T14:00:34.782Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succesfully creates a new address for a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 23,
+                  "zipCode": "36083-571",
+                  "street": "Rua Halfed",
+                  "complement": "proximo ao parque",
+                  "neighborhood": "centro",
+                  "city": "Juiz de Fora",
+                  "uf": "MG",
+                  "idUser": 2,
+                  "number": 60,
+                  "updatedAt": "2020-12-29T14:00:34.782Z",
+                  "createdAt": "2020-12-29T14:00:34.782Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The address used is already registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Address already in registered"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Address"]
+      }
+    },
+    "/addresses/{id}": {
+      "parameters": [
+        {
+          "name": "zipcode",
+          "in": "path",
+          "description": "User ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Returns the address data",
+        "summary": "Returns the address data",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "200": {
+            "description": "Return a address user based on its zipcode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "cep": "36083-571",
+                  "logradouro": "Rua Sylvio Ribeiro Aragão",
+                  "complemento": "",
+                  "bairro": "Jóquei Clube",
+                  "localidade": "Juiz de Fora",
+                  "uf": "MG",
+                  "ibge": "3136702",
+                  "gia": "",
+                  "ddd": "32",
+                  "siafi": "4733"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No address was found for the zipcode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Address Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Address"]
+      },
+      "patch": {
+        "description": "Updates the address for a user's information",
+        "summary": "Updates the address for a user's information",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "street": {
+                  "type": "string"
+                },
+                "neighborhood": {
+                  "type": "string"
+                },
+                "complement": {
+                  "type": "string"
+                },
+                "uf": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "number": {
+                  "type": "integer"
+                },
+                "idUser": {
+                  "type": "integer"
+                }
+              },
+              "example": {
+                "zipCode": "15847-519",
+                "street": "Rua Jucelino Kubstech",
+                "complement": "Avenida paralela ao industrial",
+                "neighborhood": "Avenida JK",
+                "city": "Juiz de Fora",
+                "uf": "MG",
+                "idUser": 1,
+                "number": 380
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No address was found for the zipcode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Address Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Address"]
+      },
+      "delete": {
+        "summary": "Deletes the address for  a user from the application",
+        "description": "Deletes the address for a user from the application",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No address user was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Address Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Address"]
+      }
+    },
+    "/movies/": {
+      "summary": "Users CRUD",
+      "get": {
+        "description": "Returns a list of all movies registered with pagination",
+        "summary": "Returns a list of all movies registered with pagination",
+        "security": [{ "BearerToken": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The page to be returned"
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The number of documents to limit per page"
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sort order of the documents returned, ex: createdAt:desc. Format: attribute:value -> ['asc', 'desc']"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of movies with metadata details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "metadata": {
+                    "total": 1,
+                    "totalPages": 1
+                  },
+                  "data": [
+                    {
+                      "id": 8,
+                      "name": "Matrix 007",
+                      "director": "Kenny",
+                      "author": "River",
+                      "genre": "Ação",
+                      "createdBy": 1,
+                      "updatedBy": 1,
+                      "createdAt": "2020-12-28T17:33:43.665Z",
+                      "updatedAt": "2020-12-28T17:33:43.665Z",
+                      "deletedAt": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No users were found for the used criteria"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movie"]
+      },
+      "post": {
+        "summary": "Creates an movie",
+        "description": "Creates an movie in the application",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "director": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "integer"
+                  },
+                  "updatedBy": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "name": "Matrix 007",
+                "director": "Kenny",
+                "author": "River",
+                "genre": "Ação",
+                "createdBy": 1,
+                "updatedBy": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succesfully creates a new movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 8,
+                  "genre": "Ação",
+                  "author": "River",
+                  "director": "Kenny",
+                  "name": "Matrix 007",
+                  "createdBy": 1,
+                  "updatedBy": 1,
+                  "updatedAt": "2020-12-28T17:33:43.665Z",
+                  "createdAt": "2020-12-28T17:33:43.665Z",
+                  "deletedAt": null
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The address movie is already registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Address already in registered"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movie"]
+      }
+    },
+    "/movies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "User ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "description": "Returns the movies data",
+        "summary": "Returns the movies data",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "200": {
+            "description": "Return a movies based on its id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 2,
+                  "name": "Matrix 01",
+                  "director": "Kenny",
+                  "author": "River",
+                  "genre": "Ação",
+                  "createdBy": 1,
+                  "updatedBy": 1,
+                  "createdAt": "2020-12-16T19:40:35.974Z",
+                  "updatedAt": "2020-12-16T19:40:35.974Z",
+                  "deletedAt": null
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No movie was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "User Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movie"]
+      },
+      "patch": {
+        "description": "Updates the movie information",
+        "summary": "Updates the movie information",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "director": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "createdBy": {
+                    "type": "integer"
+                  },
+                  "updatedBy": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "name": "Matrix 10",
+                "director": "Kenny",
+                "author": "River",
+                "genre": "Ação",
+                "createdBy": 2,
+                "updatedBy": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No movie was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Movie Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movie"]
+      },
+      "delete": {
+        "summary": "Deletes the movie from the application",
+        "description": "Deletes the movie from the application",
+        "security": [{ "BearerToken": [] }],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No movie was found for the id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Movie Not Found"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Movie"]
+      }
+    },
+    "/votes/": {
+      "summary": "Users CRUD",
+      "get": {
+        "description": "Returns a list of all votes in movies registered with pagination",
+        "summary": "Returns a list of all votes in movies registered with pagination",
+        "security": [{ "BearerToken": [] }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The page to be returned"
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The number of documents to limit per page"
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sort order of the documents returned, ex: createdAt:desc. Format: attribute:value -> ['asc', 'desc']"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of votes with metadata details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "metadata": {
+                    "total": 1,
+                    "totalPages": 1
+                  },
+                  "data": [
+                    {
+                      "id": 2,
+                      "note": 4,
+                      "idUser": 2,
+                      "idMovie": 2,
+                      "createdAt": "2020-12-24T12:20:12.658Z",
+                      "updatedAt": "2020-12-24T12:20:12.658Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No votes were found for the used criteria"
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Vote"]
+      },
+      "post": {
+        "summary": "Creates an vote for a movie",
+        "description": "Creates an vote in the application",
+        "security": [{ "BearerToken": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idUser": {
+                    "type": "integer"
+                  },
+                  "idMovie": {
+                    "type": "integer"
+                  },
+                  "note": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "idUser": 2,
+                "idMovie": 10,
+                "note": 4
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succesfully creates a new vote for the movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "id": 3,
+                  "idUser": 5,
+                  "idMovie": 2,
+                  "note": 4,
+                  "updatedAt": "2020-12-31T18:12:37.474Z",
+                  "createdAt": "2020-12-31T18:12:37.474Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The authorization header is missing or the token is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "Invalid Token"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The user already registered vote in this movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "ApplicationError",
+                  "message": "user already vote in this movie"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Vote"]
+      }
     }
   },
   "components": {
@@ -724,6 +1941,122 @@
           },
           "email": {
             "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Administrator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "idUser": {
+            "type": "integer"
+          },
+          "admin": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "street": {
+            "type": "string"
+          },
+          "neighborhood": {
+            "type": "string"
+          },
+          "complement": {
+            "type": "string"
+          },
+          "uf": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "idUser": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "director": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "created_by_user_id": {
+            "type": "string"
+          },
+          "updated_by_user_id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "vote": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "idUser": {
+            "type": "integer"
+          },
+          "idMovie": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string"
