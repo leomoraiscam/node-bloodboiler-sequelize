@@ -121,3 +121,144 @@ describe('GET /users', () => {
     expect(response.status).toBe(StatusCodes.OK);
   });
 });
+
+describe('PUT /addresses', () => {
+  test('Should update an address of user', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleAddress = {
+      zipCode: '36083571',
+      street: 'Rua Sylvio Ribeiro Aragão',
+      complement: 'condominio',
+      neighborhood: 'Bairro industrial',
+      city: 'Juiz de Fora',
+      uf: 'MG',
+      idUser: user.body.id,
+      number: 200,
+    };
+
+    const address = await request(app)
+      .post(`${baseURL}/addresses`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleAddress);
+
+    const updateSampleAddress = {
+      zipCode: '36083-571',
+      street: 'Rua Sylvio Ribeiro Aragão, Nº 200',
+      complement: 'condominio jardim bandeirantes',
+      neighborhood: 'Bairro industrial',
+      city: 'Juiz de Fora',
+      uf: 'MG',
+      idUser: user.body.id,
+      number: 200,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/addresses/${address.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(updateSampleAddress);
+
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleAddress = {
+      zipCode: '36083571',
+      street: 'Rua Sylvio Ribeiro Aragão',
+      complement: 'condominio',
+      neighborhood: 'Bairro industrial',
+      city: 'Juiz de Fora',
+      uf: 'MG',
+      idUser: user.body.id,
+      number: 200,
+    };
+
+    const address = await request(app)
+      .post(`${baseURL}/addresses`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleAddress);
+
+    const updateSampleAddress = {
+      zipCode: '36083-571',
+      street: 'Rua Sylvio Ribeiro Aragão, Nº 200',
+      complement: 'condominio jardim bandeirantes',
+      neighborhood: 'Bairro industrial',
+      city: 'Juiz de Fora',
+      uf: 'MG',
+      idUser: user.body.id,
+      number: 200,
+    };
+
+    const response = await request(app)
+      .put(`${baseURL}/addresses/101010 `)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(updateSampleAddress);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});
+
+describe('DELETE /addresses', () => {
+  test('Should delete an address', async () => {
+    sampleUser = {
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      password: 'P@ssw0rd',
+    };
+
+    const user = await request(app)
+      .post(`${baseURL}/users`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(sampleUser);
+
+    const mainSampleAddress = {
+      zipCode: '36083571',
+      street: 'Rua Sylvio Ribeiro Aragão',
+      complement: 'condominio',
+      neighborhood: 'Bairro industrial',
+      city: 'Juiz de Fora',
+      uf: 'MG',
+      idUser: user.body.id,
+      number: 200,
+    };
+
+    const address = await request(app)
+      .post(`${baseURL}/addresses`)
+      .set('Authorization', `Bearer ${authToken}`)
+      .send(mainSampleAddress);
+
+    const response = await request(app)
+      .delete(`${baseURL}/addresses/${address.body.id}`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  test('Should return 404 - Not Found', async () => {
+    const response = await request(app)
+      .delete(`${baseURL}/addresses/101010`)
+      .set('Authorization', `Bearer ${authToken}`);
+
+    expect(response.status).toBe(StatusCodes.NOT_FOUND);
+  });
+});
