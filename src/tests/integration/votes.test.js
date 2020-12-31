@@ -121,7 +121,6 @@ describe('Votes Endpoints', () => {
         .set('Authorization', `Bearer ${authToken}`)
         .send(vote);
 
-      console.log('test', response.body);
       expect(response.status).toBe(StatusCodes.NOT_FOUND);
     });
   });
