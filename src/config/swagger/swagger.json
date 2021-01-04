@@ -102,6 +102,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         }
       }
@@ -177,6 +191,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         }
       }
@@ -217,6 +245,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -271,6 +313,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -350,6 +406,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -450,6 +520,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["User"]
@@ -529,6 +613,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["User"]
@@ -593,6 +691,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -675,6 +787,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["User"]
@@ -711,6 +837,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -815,6 +955,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Administrator"]
@@ -889,6 +1043,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Administrator"]
@@ -959,6 +1127,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Administrator"]
@@ -1019,6 +1201,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Administrator"]
@@ -1055,6 +1251,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "Administrator Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -1168,6 +1378,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Address"]
@@ -1236,6 +1460,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "Address Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -1320,6 +1558,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Address"]
@@ -1356,6 +1608,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "Address Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -1461,6 +1727,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Movie"]
@@ -1556,6 +1836,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Movie"]
@@ -1624,6 +1918,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "User Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -1703,6 +2011,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Movie"]
@@ -1739,6 +2061,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "Movie Not Found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
@@ -1840,6 +2176,20 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
+                }
+              }
+            }
           }
         },
         "tags": ["Vote"]
@@ -1916,6 +2266,20 @@
                 "example": {
                   "name": "ApplicationError",
                   "message": "user already vote in this movie"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "name": "Error",
+                  "message": "Internal Server error"
                 }
               }
             }
