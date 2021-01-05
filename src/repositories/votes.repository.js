@@ -1,4 +1,4 @@
-const { Votes, User } = require('../models');
+const { Votes } = require('../models');
 
 module.exports = {
   list: (query) => Votes.findAndCountAll(query),
