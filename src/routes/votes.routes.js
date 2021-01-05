@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { votesController } = require('../controllers');
-const { isAuthorized, validate } = require('../middlewares');
+const { isAuthorized, validate, isAdministrators } = require('../middlewares');
 const {
   validationSchemas: { votes },
 } = require('../validations');
 
-router.get('/', validate(votes.list), votesController.list);
-router.post('/', validate(votes.create), votesController.create);
+router.get('/', isAuthorized, isAdministrators, validate(votes.list), votesController.list);
+router.post('/', isAuthorized, validate(votes.create), votesController.create);
 
 module.exports.votes = router;
