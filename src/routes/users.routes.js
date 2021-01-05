@@ -7,7 +7,7 @@ const {
 
 router.get('/', isAuthorized, validate(users.list), usersController.list);
 router.get('/:id', isAuthorized, validate(users.get), usersController.get);
-router.post('/', isAuthorized, validate(users.create), usersController.create);
+router.post('/', validate(users.create), usersController.create);
 router.put('/:id', isAuthorized, validate(users.update), usersController.update);
 router.delete('/:id', isAuthorized, validate(users.destroy), usersController.destroy);
 
