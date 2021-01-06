@@ -9,11 +9,11 @@ module.exports = {
         {
           model: Votes,
           as: 'votes',
-          attributes: ['id', 'note', 'createdAt'],
+          attributes: ['note', 'createdAt'],
           include: [
             {
               model: User,
-              attributes: ['id', 'name', 'email'],
+              attributes: ['name', 'email'],
             },
           ],
         },
