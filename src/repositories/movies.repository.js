@@ -1,5 +1,4 @@
 const { Movies, Votes, User } = require('../models');
-const sequelize = require('sequelize');
 
 module.exports = {
   getById: (id) => Movies.findByPk(id),
