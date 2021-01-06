@@ -1,4 +1,5 @@
 const { Movies, Votes, User } = require('../models');
+const sequelize = require('sequelize');
 
 module.exports = {
   getById: (id) => Movies.findByPk(id),
@@ -9,11 +10,11 @@ module.exports = {
         {
           model: Votes,
           as: 'votes',
-          attributes: ['id', 'note', 'createdAt'],
+          attributes: ['note', 'createdAt'],
           include: [
             {
               model: User,
-              attributes: ['id', 'name', 'email'],
+              attributes: ['name', 'email'],
             },
           ],
         },
