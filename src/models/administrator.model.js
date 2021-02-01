@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     'Administrator',
     {
       admin: DataTypes.INTEGER,
+      idUser: {
+        type: DataTypes.INTEGER,
+        field: 'id_user',
+      },
       createdAt: {
         type: DataTypes.DATE,
         field: 'created_at',
@@ -19,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Administrator.associate = function associate(models) {
     models.Administrator.belongsTo(models.User, {
-      foreignKey: 'id_user',
+      foreignKey: 'idUser',
+      as: 'user',
     });
   };
 

@@ -3,9 +3,9 @@
   "version": "1.1.0",
   "description": "A API built on top of expressJS",
   "main": "app.js",
-  "author": "Lucas A Pelegrino <lucas.assuncao.p@gmail.com>",
+  "author": "Leonardo Morais <lmorais.contato.p@gmail.com>",
   "license": "MIT",
-  "repository": "https://github.com/lucas-a-pelegrino/node-bloodboiler-sequelized",
+  "repository": "https://github.com/leomoraiscam/node-bloodboiler-sequelize",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -17,7 +17,8 @@
     "test": "jest -i",
     "test:coverage": "jest -i && codecov",
     "pretest": "NODE_ENV=test npx sequelize db:create && NODE_ENV=test npx sequelize db:migrate",
-    "posttest": "NODE_ENV=test npx sequelize db:drop"
+    "posttest": "NODE_ENV=test npx sequelize db:drop",
+    "commit": "cz"
   },
   "husky": {
     "hooks": {
@@ -27,8 +28,11 @@
     }
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
+    "commitizen": "^2.7.6",
     "cors": "^2.8.5",
+    "cz-conventional-changelog": "^1.1.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
@@ -48,6 +52,8 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "codecov": "^3.7.1",
+    "company-commit": "^1.1.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",
@@ -76,5 +82,10 @@
     "rest",
     "api",
     "jest"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

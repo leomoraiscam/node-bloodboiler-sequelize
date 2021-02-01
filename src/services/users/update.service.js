@@ -6,6 +6,7 @@ const { messages } = require('../../helpers');
 
 module.exports.update = async (id, body) => {
   const user = await usersRepository.getById(id);
+
   if (!user) {
     throw new ApplicationError(messages.notFound('users'), StatusCodes.NOT_FOUND);
   }
