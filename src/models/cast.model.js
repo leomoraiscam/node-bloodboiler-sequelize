@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       idMovie: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: 'id_movie',
+        field: 'movie_id',
       },
       createdAt: {
         type: DataTypes.DATE,

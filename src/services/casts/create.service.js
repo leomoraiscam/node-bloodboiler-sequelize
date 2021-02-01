@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const { Op } = require('sequelize');
 const { castsRepository } = require('../../repositories');
 const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
@@ -6,8 +7,10 @@ const { messages } = require('../../helpers');
 module.exports = {
   create: async (params) => {
     const existCast = await castsRepository.get({
-      name: params.name,
-      idMovie: params.idMovie,
+      [Op.iLike]: {
+        name: params.name,
+      },
+      movieId: params.movieId,
     });
 
     if (existCast) {
