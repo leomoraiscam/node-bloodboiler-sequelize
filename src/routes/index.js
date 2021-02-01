@@ -4,7 +4,6 @@ const { administrators } = require('./administrators.routes');
 const { movies } = require('./movies.routes');
 const { addresses } = require('./addresses.routes');
 const { votes } = require('./votes.routes');
-const { casts } = require('./casts.routes');
 
 module.exports = {
   users,
@@ -13,5 +12,4 @@ module.exports = {
   movies,
   addresses,
   votes,
-  casts,
 };
