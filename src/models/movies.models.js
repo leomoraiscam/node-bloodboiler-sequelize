@@ -70,6 +70,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'idMovie',
       as: 'votes',
     });
+    models.Movies.hasMany(models.Casts, {
+      foreignKey: 'idMovie',
+      as: 'casts',
+    });
   };
 
   return Movies;

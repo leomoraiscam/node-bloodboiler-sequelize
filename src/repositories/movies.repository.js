@@ -1,4 +1,4 @@
-const { Movies, Votes, User } = require('../models');
+const { Movies, Votes, User, Casts } = require('../models');
 
 module.exports = {
   getById: (id) => Movies.findByPk(id),
@@ -16,6 +16,10 @@ module.exports = {
               attributes: ['name', 'email'],
             },
           ],
+        },
+        {
+          model: Casts,
+          as: 'casts',
         },
       ],
     }),
