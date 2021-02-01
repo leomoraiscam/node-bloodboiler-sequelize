@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      id_movie: {
+      movie_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
