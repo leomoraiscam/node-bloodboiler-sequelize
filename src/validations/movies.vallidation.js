@@ -6,6 +6,8 @@ const create = {
     director: yup.string().required(),
     author: yup.string().required(),
     genre: yup.string().required(),
+    lang: yup.string().required(),
+    description: yup.string().required(),
   }),
 };
 
