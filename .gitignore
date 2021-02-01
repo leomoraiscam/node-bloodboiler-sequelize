@@ -5,3 +5,7 @@ coverage
 
 .env
 .codecov.yml
+
+temp/
+tmp/*
+!tmp/.gitkeep

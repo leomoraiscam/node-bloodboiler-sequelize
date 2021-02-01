@@ -33,11 +33,15 @@ module.exports = {
   create: catchAsync(async (request, response) => {
     const {
       body,
+      file,
       session: { id },
     } = request;
 
+    const cover = file.filename;
+
     const finalbody = {
       ...body,
+      cover,
       createdBy: id,
       updatedBy: id,
     };
