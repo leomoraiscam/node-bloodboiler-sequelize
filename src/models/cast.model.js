@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Casts.associate = function associate(models) {
     models.Casts.belongsTo(models.Movies, {
-      foreignKey: 'idMovie',
+      foreignKey: 'MovieId',
       as: 'movie',
     });
   };
