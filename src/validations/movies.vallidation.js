@@ -8,6 +8,15 @@ const create = {
     genre: yup.string().required(),
     lang: yup.string().required(),
     description: yup.string().required(),
+    duration: yup.string().required(),
+    classification: yup
+      .mixed()
+      .oneOf(['7+', '13+', '16+', '18+'])
+      .required(),
+    yearCreation: yup
+      .number()
+      .integer()
+      .required(),
   }),
 };
 

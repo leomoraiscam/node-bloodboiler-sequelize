@@ -30,6 +30,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      duration: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      classification: {
+        type: DataTypes.ENUM('7+', '13+', '16+', '18+'),
+        allowNull: false,
+      },
+      yearCreation: {
+        type: DataTypes.INTEGER,
+        field: 'year_creation',
+        allowNull: false,
+      },
       createdBy: {
         type: DataTypes.INTEGER,
         field: 'created_by_user_id',
