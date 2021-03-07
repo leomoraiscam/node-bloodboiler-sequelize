@@ -11,7 +11,14 @@ const upload = multer(uploadConfig);
 
 router.get('/', validate(movies.list), moviesController.list);
 router.get('/:id', moviesController.get);
-router.post('/', isAuthorized, upload.single('file'), validate(movies.create), moviesController.create);
+router.post(
+  '/',
+  isAuthorized,
+  isAdministrators,
+  upload.single('file'),
+  validate(movies.create),
+  moviesController.create,
+);
 router.put('/:id', isAuthorized, isAdministrators, validate(movies.update), moviesController.update);
 router.delete('/:id', isAuthorized, isAdministrators, moviesController.destroy);
 

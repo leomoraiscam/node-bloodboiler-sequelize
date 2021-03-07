@@ -31,10 +31,23 @@ module.exports = {
   }),
 
   create: catchAsync(async (request, response) => {
-    const { body } = request;
+    const {
+      body,
+      file,
+      session: { id },
+    } = request;
 
-    const address = await castsServices.create(body);
+    const avatar = file.filename;
 
-    return response.status(StatusCodes.CREATED).json(address);
+    const finalbody = {
+      ...body,
+      avatar,
+      createdBy: id,
+      updatedBy: id,
+    };
+
+    const cast = await castsServices.create(finalbody);
+
+    return response.status(StatusCodes.CREATED).json(cast);
   }),
 };

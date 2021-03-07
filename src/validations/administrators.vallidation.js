@@ -23,10 +23,7 @@ const create = {
       .number()
       .positive()
       .required(),
-    admin: yup
-      .number()
-      .positive()
-      .required(),
+    admin: yup.boolean(),
   }),
 };
 
@@ -36,7 +33,7 @@ const update = {
       .number()
       .positive()
       .required(),
-    admin: yup.number().required(),
+    admin: yup.boolean().required(),
   }),
 };
 

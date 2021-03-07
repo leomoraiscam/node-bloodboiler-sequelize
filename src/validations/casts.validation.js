@@ -27,7 +27,6 @@ const create = {
   body: yup.object().shape({
     actor: yup.string().required(),
     character: yup.string().required(),
-    avatar: yup.string(),
     idMovie: yup
       .number()
       .integer()

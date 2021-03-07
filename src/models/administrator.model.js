@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Administrator = sequelize.define(
     'Administrator',
     {
-      admin: DataTypes.INTEGER,
+      admin: DataTypes.BOOLEAN,
       idUser: {
         type: DataTypes.INTEGER,
         field: 'id_user',

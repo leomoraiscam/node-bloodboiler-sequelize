@@ -15,7 +15,7 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       admin: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       created_at: {

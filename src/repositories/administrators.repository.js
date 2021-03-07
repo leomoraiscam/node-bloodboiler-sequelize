@@ -1,6 +1,22 @@
 const { Administrator, User } = require('../models');
 
 module.exports = {
+  list: (query) =>
+    Administrator.findAndCountAll({
+      ...query,
+      attributes: ['id', 'admin', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
+    }),
+  get: (params) =>
+    Administrator.findOne({
+      where: params,
+    }),
   getById: (id) =>
     Administrator.findByPk(id, {
       include: [
@@ -10,21 +26,6 @@ module.exports = {
           attributes: ['name', 'email'],
         },
       ],
-    }),
-  list: (query) =>
-    Administrator.findAndCountAll({
-      ...query,
-      include: [
-        {
-          model: User,
-          as: 'user',
-          attributes: ['name', 'email'],
-        },
-      ],
-    }),
-  get: (params) =>
-    Administrator.findOne({
-      where: params,
     }),
   create: (params) => Administrator.create(params),
   update: (args, id) =>
