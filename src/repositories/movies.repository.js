@@ -17,10 +17,6 @@ module.exports = {
             },
           ],
         },
-        {
-          model: Casts,
-          as: 'casts',
-        },
       ],
     }),
   get: (params) =>

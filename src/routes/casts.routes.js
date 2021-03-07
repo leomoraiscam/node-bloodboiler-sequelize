@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const { castsController } = require('../controllers');
+const { castController } = require('../controllers');
 const { isAuthorized, validate } = require('../middlewares');
 const {
-  validationSchemas: { addresses },
+  validationSchemas: { casts },
 } = require('../validations');
 
-router.get('/:cep', isAuthorized, castsController.get);
-router.post('/', isAuthorized, castsController.create);
+router.get('/', isAuthorized, validate(casts.list), castController.list);
+router.get('/:id', isAuthorized, validate(casts.get), castController.get);
+router.post('/', isAuthorized, validate(casts.create), castController.create);
 
 module.exports.casts = router;
