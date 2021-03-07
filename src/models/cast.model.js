@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Casts = sequelize.define(
     'Casts',
     {
-      name: {
+      actor: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -17,7 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       idMovie: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: 'movie_id',
+        field: 'id_movie',
+      },
+      createdBy: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'created_by_user_id',
+      },
+      updatedBy: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'updated_by_user_id',
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -27,15 +37,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         field: 'updated_at',
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        field: 'deleted_at',
+      },
     },
     {
+      paramoid: true,
       tableName: 'casts',
     },
   );
 
   Casts.associate = function associate(models) {
     models.Casts.belongsTo(models.Movies, {
-      foreignKey: 'MovieId',
+      foreignKey: 'idMovie',
       as: 'movie',
     });
   };

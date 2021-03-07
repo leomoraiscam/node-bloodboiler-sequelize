@@ -8,9 +8,8 @@ module.exports = {
   create: async (params) => {
     const existCast = await castsRepository.get({
       [Op.iLike]: {
-        name: params.name,
+        actor: params.name,
       },
-      movieId: params.movieId,
     });
 
     if (existCast) {

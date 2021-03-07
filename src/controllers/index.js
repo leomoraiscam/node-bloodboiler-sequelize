@@ -4,6 +4,7 @@ const administratorsController = require('./administrators.controller');
 const moviesController = require('./movies.controller');
 const addressesController = require('./addresses.controller');
 const votesController = require('./votes.controller');
+const castController = require('./casts.controller');
 
 module.exports = {
   usersController,
@@ -12,4 +13,5 @@ module.exports = {
   moviesController,
   addressesController,
   votesController,
+  castController,
 };

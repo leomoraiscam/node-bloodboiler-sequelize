@@ -1,5 +1,4 @@
 const { Votes } = require('../models');
-const sequelize = require('sequelize');
 
 module.exports = {
   list: (query) => Votes.findAndCountAll(query),
