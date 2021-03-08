@@ -14,9 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      genre: {
-        type: DataTypes.STRING,
+      idGenre: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'id_genre',
       },
       description: {
         type: DataTypes.STRING,
@@ -67,8 +68,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'movies',
       paranoid: true,
+      tableName: 'movies',
     },
   );
 
@@ -86,6 +87,10 @@ module.exports = (sequelize, DataTypes) => {
     models.Movies.hasMany(models.Casts, {
       foreignKey: 'idMovie',
       as: 'casts',
+    });
+    models.Movies.belongsTo(models.Genres, {
+      foreignKey: 'idGenre',
+      as: 'genres',
     });
   };
 

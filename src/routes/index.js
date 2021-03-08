@@ -5,6 +5,7 @@ const { movies } = require('./movies.routes');
 const { addresses } = require('./addresses.routes');
 const { votes } = require('./votes.routes');
 const { casts } = require('./casts.routes');
+const { genres } = require('./genre.routes');
 
 module.exports = {
   users,
@@ -14,4 +15,5 @@ module.exports = {
   addresses,
   votes,
   casts,
+  genres,
 };

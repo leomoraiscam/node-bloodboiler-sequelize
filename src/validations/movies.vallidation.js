@@ -17,6 +17,10 @@ const create = {
       .number()
       .integer()
       .required(),
+    idGenre: yup
+      .number()
+      .integer()
+      .required(),
   }),
 };
 

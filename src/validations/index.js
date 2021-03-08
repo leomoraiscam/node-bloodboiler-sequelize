@@ -5,6 +5,7 @@ const { administrators } = require('./administrators.vallidation');
 const { addresses } = require('./addresses.vallidation');
 const { votes } = require('./votes.vallidation');
 const { casts } = require('./casts.validation');
+const { genres } = require('./genres.validation');
 
 module.exports.validationSchemas = {
   users,
@@ -14,4 +15,5 @@ module.exports.validationSchemas = {
   addresses,
   votes,
   casts,
+  genres,
 };

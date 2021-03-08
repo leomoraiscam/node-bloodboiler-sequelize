@@ -6,6 +6,7 @@ const moviesService = require('./movies');
 const addressesServives = require('./addresses');
 const votesService = require('./votes');
 const castsServices = require('./casts');
+const genresServices = require('./genres');
 
 module.exports = {
   usersService,
@@ -16,4 +17,5 @@ module.exports = {
   addressesServives,
   votesService,
   castsServices,
+  genresServices,
 };

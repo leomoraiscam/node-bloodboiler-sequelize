@@ -1,23 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-  const Casts = sequelize.define(
-    'Casts',
+  const Genres = sequelize.define(
+    'Genres',
     {
-      actor: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      character: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      avatar: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      idMovie: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'movie_id',
       },
       createdBy: {
         type: DataTypes.INTEGER,
@@ -44,16 +31,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       paramoid: true,
-      tableName: 'casts',
+      tableName: 'genres',
     },
   );
 
-  Casts.associate = function associate(models) {
-    models.Casts.belongsTo(models.Movies, {
-      foreignKey: 'idMovie',
-      as: 'movie',
+  Genres.associate = function associate(models) {
+    models.User.hasMany(models.Movies, {
+      foreignKey: 'idGenre',
+      as: 'movies',
     });
   };
 
-  return Casts;
+  return Genres;
 };
