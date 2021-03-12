@@ -5,7 +5,6 @@ const create = {
     name: yup.string().required(),
     director: yup.string().required(),
     author: yup.string().required(),
-    genre: yup.string().required(),
     lang: yup.string().required(),
     description: yup.string().required(),
     duration: yup.string().required(),
@@ -17,10 +16,7 @@ const create = {
       .number()
       .integer()
       .required(),
-    idGenre: yup
-      .number()
-      .integer()
-      .required(),
+    genresIds: yup.array().of(yup.number()),
   }),
 };
 
@@ -46,7 +42,6 @@ const update = {
     name: yup.string().required(),
     director: yup.string().required(),
     author: yup.string().required(),
-    genre: yup.string().required(),
     lang: yup.string().required(),
     description: yup.string().required(),
   }),

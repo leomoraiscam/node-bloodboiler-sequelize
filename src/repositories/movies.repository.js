@@ -31,7 +31,7 @@ module.exports = {
       where: params,
     }),
   getById: (id) => Movies.findByPk(id),
-  create: (params) => Movies.create(params),
+  create: (params, transaction) => Movies.create(params, { transaction }),
   update: (args, id) =>
     Movies.update(args, {
       where: {
