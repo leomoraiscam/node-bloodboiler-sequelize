@@ -6,6 +6,7 @@ const addressesRepository = require('./addresses.repository');
 const votesRepository = require('./votes.repository');
 const castsRepository = require('./casts.repository');
 const genresRepository = require('./genres.repository');
+const genresMoviesRepository = require('./genresMovies.repository');
 
 module.exports = {
   usersRepository,
@@ -16,4 +17,5 @@ module.exports = {
   votesRepository,
   castsRepository,
   genresRepository,
+  genresMoviesRepository,
 };
