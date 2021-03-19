@@ -19,10 +19,15 @@ module.exports = {
         {
           model: Casts,
           as: 'casts',
+          attributes: ['id', 'actor', 'character', 'avatar'],
         },
         {
           model: Genres,
           as: 'genres',
+          attributes: ['id', 'name'],
+          through: {
+            attributes: [],
+          },
         },
       ],
     }),
@@ -30,7 +35,35 @@ module.exports = {
     Movies.findOne({
       where: params,
     }),
-  getById: (id) => Movies.findByPk(id),
+  getById: (id) =>
+    Movies.findByPk(id, {
+      include: [
+        {
+          model: Votes,
+          as: 'votes',
+          attributes: ['id', 'note', 'createdAt'],
+          include: [
+            {
+              model: User,
+              attributes: ['name', 'email'],
+            },
+          ],
+        },
+        {
+          model: Casts,
+          as: 'casts',
+          attributes: ['id', 'actor', 'character', 'avatar'],
+        },
+        {
+          model: Genres,
+          as: 'genres',
+          attributes: ['id', 'name'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    }),
   create: (params, transaction) => Movies.create(params, { transaction }),
   update: (args, id) =>
     Movies.update(args, {
