@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const { ApplicationError } = require('../../utils');
 const { messages } = require('../../helpers');
 const { moviesRepository, genresMoviesRepository, genresRepository } = require('../../repositories');
+const { invalidate } = require('../../lib/cache');
 const db = require('../../models');
 
 module.exports = {
@@ -14,12 +15,15 @@ module.exports = {
       throw new ApplicationError(messages.alreadyExists('movie'), StatusCodes.CONFLICT);
     }
 
+    const today = new Intl.DateTimeFormat('pt-BR').format(new Date(Date.now()));
     let transaction;
 
     try {
       transaction = await db.sequelize.transaction();
 
       const movie = await moviesRepository.create(params, transaction);
+
+      await invalidate(`movies-list:${today}`);
 
       const parsedItems = await Promise.all(
         params.genresIds.map(async (genre) => {
