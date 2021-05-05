@@ -25,6 +25,11 @@ module.exports = {
           model: Administrator,
           attributes: ['id', 'admin'],
         },
+        {
+          model: Addresses,
+          as: 'addresses',
+          attributes: ['street', 'neighborhood', 'complement', 'city', 'uf', 'zipCode', 'number'],
+        },
       ],
     }),
   get: (params) =>
@@ -35,6 +40,11 @@ module.exports = {
           model: Administrator,
           as: 'administrator',
           attributes: ['id', 'admin'],
+        },
+        {
+          model: Addresses,
+          as: 'addresses',
+          attributes: ['street', 'neighborhood', 'complement', 'city', 'uf', 'zipCode', 'number'],
         },
       ],
     }),

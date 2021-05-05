@@ -9,4 +9,8 @@ module.exports = {
   database: process.env.NODE_ENV !== 'test' ? process.env.DB_NAME : `${process.env.DB_NAME_TEST}`,
   host: process.env.DB_HOST,
   dialect: 'postgres',
+  define: {
+    timestamps: true,
+    underscored: true,
+  },
 };

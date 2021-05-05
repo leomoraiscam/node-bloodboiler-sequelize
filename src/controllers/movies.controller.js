@@ -12,7 +12,7 @@ module.exports = {
       sortBy,
     });
 
-    if (!movies || movies.data.length === 0) {
+    if (!movies) {
       return response
         .status(StatusCodes.NO_CONTENT)
         .set({ 'Content-Length': '0' })

@@ -1,7 +1,6 @@
-const { Movies, Votes, User } = require('../models');
+const { Movies, Votes, User, Casts, Genres } = require('../models');
 
 module.exports = {
-  getById: (id) => Movies.findByPk(id),
   list: (query) =>
     Movies.findAndCountAll({
       ...query,
@@ -9,7 +8,7 @@ module.exports = {
         {
           model: Votes,
           as: 'votes',
-          attributes: ['note', 'createdAt'],
+          attributes: ['id', 'note', 'createdAt'],
           include: [
             {
               model: User,
@@ -17,13 +16,55 @@ module.exports = {
             },
           ],
         },
+        {
+          model: Casts,
+          as: 'casts',
+          attributes: ['id', 'actor', 'character', 'avatar'],
+        },
+        {
+          model: Genres,
+          as: 'genres',
+          attributes: ['id', 'name'],
+          through: {
+            attributes: [],
+          },
+        },
       ],
     }),
   get: (params) =>
     Movies.findOne({
       where: params,
     }),
-  create: (params) => Movies.create(params),
+  getById: (id) =>
+    Movies.findByPk(id, {
+      include: [
+        {
+          model: Votes,
+          as: 'votes',
+          attributes: ['id', 'note', 'createdAt'],
+          include: [
+            {
+              model: User,
+              attributes: ['name', 'email'],
+            },
+          ],
+        },
+        {
+          model: Casts,
+          as: 'casts',
+          attributes: ['id', 'actor', 'character', 'avatar'],
+        },
+        {
+          model: Genres,
+          as: 'genres',
+          attributes: ['id', 'name'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    }),
+  create: (params, transaction) => Movies.create(params, { transaction }),
   update: (args, id) =>
     Movies.update(args, {
       where: {

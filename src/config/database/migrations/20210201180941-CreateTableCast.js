@@ -1,21 +1,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('administrators', {
+    return queryInterface.createTable('casts', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      id_user: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
-      admin: {
-        type: Sequelize.BOOLEAN,
+      character: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      avatar: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      movie_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       created_at: {
@@ -30,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('administrators');
+    return queryInterface.dropTable('casts');
   },
 };

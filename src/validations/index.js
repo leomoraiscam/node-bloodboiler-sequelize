@@ -4,6 +4,8 @@ const { movies } = require('./movies.vallidation');
 const { administrators } = require('./administrators.vallidation');
 const { addresses } = require('./addresses.vallidation');
 const { votes } = require('./votes.vallidation');
+const { casts } = require('./casts.validation');
+const { genres } = require('./genres.validation');
 
 module.exports.validationSchemas = {
   users,
@@ -12,4 +14,6 @@ module.exports.validationSchemas = {
   administrators,
   addresses,
   votes,
+  casts,
+  genres,
 };

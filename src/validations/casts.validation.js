@@ -17,28 +17,25 @@ const list = {
   }),
 };
 
+const get = {
+  params: yup.object().shape({
+    id: yup.number().integer(),
+  }),
+};
+
 const create = {
   body: yup.object().shape({
-    idUser: yup
+    actor: yup.string().required(),
+    character: yup.string().required(),
+    idMovie: yup
       .number()
-      .positive()
+      .integer()
       .required(),
-    admin: yup.boolean(),
   }),
 };
 
-const update = {
-  body: yup.object().shape({
-    id: yup
-      .number()
-      .positive()
-      .required(),
-    admin: yup.boolean().required(),
-  }),
-};
-
-module.exports.administrators = {
-  list,
+module.exports.casts = {
   create,
-  update,
+  list,
+  get,
 };

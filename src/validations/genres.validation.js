@@ -17,28 +17,20 @@ const list = {
   }),
 };
 
+const get = {
+  params: yup.object().shape({
+    id: yup.number().integer(),
+  }),
+};
+
 const create = {
   body: yup.object().shape({
-    idUser: yup
-      .number()
-      .positive()
-      .required(),
-    admin: yup.boolean(),
+    name: yup.string().required(),
   }),
 };
 
-const update = {
-  body: yup.object().shape({
-    id: yup
-      .number()
-      .positive()
-      .required(),
-    admin: yup.boolean().required(),
-  }),
-};
-
-module.exports.administrators = {
-  list,
+module.exports.genres = {
   create,
-  update,
+  list,
+  get,
 };

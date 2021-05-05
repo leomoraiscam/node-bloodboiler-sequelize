@@ -6,6 +6,7 @@ const {
 } = require('../validations');
 
 router.get('/', isAuthorized, isAdministrators, validate(votes.list), votesController.list);
+router.get('/', isAuthorized, isAdministrators, validate(votes.get), votesController.list);
 router.post('/', isAuthorized, validate(votes.create), votesController.create);
 
 module.exports.votes = router;

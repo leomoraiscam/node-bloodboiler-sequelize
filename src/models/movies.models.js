@@ -14,10 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      genre: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       description: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -29,6 +25,19 @@ module.exports = (sequelize, DataTypes) => {
       cover: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      duration: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      classification: {
+        type: DataTypes.ENUM('7+', '13+', '16+', '18+'),
+        allowNull: false,
+      },
+      yearCreation: {
+        type: DataTypes.INTEGER,
+        field: 'year_creation',
+        allowNull: false,
       },
       createdBy: {
         type: DataTypes.INTEGER,
@@ -54,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'movies',
       paranoid: true,
+      tableName: 'movies',
     },
   );
 
@@ -69,6 +78,15 @@ module.exports = (sequelize, DataTypes) => {
     models.Movies.hasMany(models.Votes, {
       foreignKey: 'idMovie',
       as: 'votes',
+    });
+    models.Movies.hasMany(models.Casts, {
+      foreignKey: 'idMovie',
+      as: 'casts',
+    });
+    models.Movies.belongsToMany(models.Genres, {
+      foreignKey: 'movie_id',
+      through: 'movie_genres',
+      as: 'genres',
     });
   };
 

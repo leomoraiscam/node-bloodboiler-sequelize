@@ -5,9 +5,18 @@ const create = {
     name: yup.string().required(),
     director: yup.string().required(),
     author: yup.string().required(),
-    genre: yup.string().required(),
     lang: yup.string().required(),
     description: yup.string().required(),
+    duration: yup.string().required(),
+    classification: yup
+      .mixed()
+      .oneOf(['7+', '13+', '16+', '18+'])
+      .required(),
+    yearCreation: yup
+      .number()
+      .integer()
+      .required(),
+    genresIds: yup.array().of(yup.number()),
   }),
 };
 
@@ -33,7 +42,6 @@ const update = {
     name: yup.string().required(),
     director: yup.string().required(),
     author: yup.string().required(),
-    genre: yup.string().required(),
     lang: yup.string().required(),
     description: yup.string().required(),
   }),
