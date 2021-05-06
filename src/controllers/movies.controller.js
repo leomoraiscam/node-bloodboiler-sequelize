@@ -37,7 +37,7 @@ module.exports = {
       session: { id },
     } = request;
 
-    const cover = file.filename;
+    const cover = file.key;
 
     const finalbody = {
       ...body,

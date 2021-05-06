@@ -61,6 +61,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         field: 'deleted_at',
       },
+      cover_url: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          switch (process.env.STORAGE_TYPE) {
+            case 'local':
+              return `${process.env.LOCAL_URL}:${process.env.PORT}/files/${this.cover}`;
+            case 's3':
+              return `${process.env.S3_URL}/${this.cover}`;
+            default:
+              return null;
+          }
+        },
+      },
     },
     {
       paranoid: true,

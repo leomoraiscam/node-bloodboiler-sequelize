@@ -35,6 +35,7 @@ app.use(xss());
 
 app.use(`/api/${version}/documentation`, swagger.serve);
 app.use(`/api/${version}/documentation`, swagger.setup(swaggerDocs));
+// app.use(`/api/${version}/files`, express.static(__dirname, '..', '..', '..', 'tmp', 'uploads'));
 
 Object.keys(routes).forEach((key) => app.use(`/api/${version}/${key}`, routes[key]));
 
