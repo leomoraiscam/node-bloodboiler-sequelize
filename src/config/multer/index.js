@@ -48,7 +48,7 @@ module.exports = {
     fileSize: 5 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    const allowedMines = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
+    const allowedMines = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif', 'text/csv'];
 
     if (allowedMines.includes(file.mimetype)) {
       cb(null, true);

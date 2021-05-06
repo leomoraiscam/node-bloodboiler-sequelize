@@ -46,4 +46,25 @@ module.exports = {
 
     return response.status(StatusCodes.CREATED).json(cast);
   }),
+
+  import: catchAsync(async (request, response) => {
+    const {
+      body,
+      file,
+      session: { id },
+    } = request;
+
+    const directory = file.path;
+
+    const finalbody = {
+      ...body,
+      directory,
+      createdBy: id,
+      updatedBy: id,
+    };
+
+    await genresServices.importGenres(finalbody);
+
+    return response.status(StatusCodes.CREATED).send();
+  }),
 };
