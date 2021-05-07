@@ -63,8 +63,8 @@ module.exports = {
       updatedBy: id,
     };
 
-    await genresServices.importGenres(finalbody);
+    const genres = await genresServices.importGenres(finalbody);
 
-    return response.status(StatusCodes.CREATED).send();
+    return response.status(StatusCodes.CREATED).json(genres);
   }),
 };

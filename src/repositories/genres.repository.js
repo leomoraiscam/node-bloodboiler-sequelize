@@ -8,4 +8,5 @@ module.exports = {
     }),
   getById: (id) => Genres.findByPk(id),
   create: (params) => Genres.create(params),
+  createAll: (params) => Genres.bulkCreate(params),
 };

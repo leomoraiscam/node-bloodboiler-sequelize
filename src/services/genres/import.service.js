@@ -29,7 +29,7 @@ module.exports = {
 
     await new Promise((resolve) => parseCSV.on('end', resolve));
 
-    genresCategories.map(async (genre) => {
+    const valuesGenres = genresCategories.map(async (genre) => {
       const { name, description, createdBy, updatedBy } = genre;
 
       const existGenre = await genresRepository.get({ name });
@@ -43,5 +43,9 @@ module.exports = {
         });
       }
     });
+
+    await Promise.all(valuesGenres);
+
+    await fs.promises.unlink(params.directory);
   },
 };
